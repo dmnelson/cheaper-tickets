@@ -5,7 +5,6 @@ package mn.david.cheapertickets
  * Date: 16/07/11
  * Time: 20:22
  */
-//@Grab(group='org.codehaus.groovy.modules.http-builder', module='http-builder', version='0.5.1' )
 import groovyx.net.http.HTTPBuilder
 import groovyx.net.http.ContentType
 import mn.david.cheapertickets.request.SearchRequest
@@ -15,6 +14,7 @@ import groovyx.net.http.HttpResponseDecorator
 import javax.servlet.http.Cookie
 import org.apache.http.impl.cookie.BasicClientCookie
 
+@Grab(group='org.codehaus.groovy.modules.http-builder', module='http-builder', version='0.5.1' )
 def http = new HTTPBuilder('http://www.submarinoviagens.com.br/Passagens/UIService/Service.svc/')
 
 def request = new SearchRequest();
@@ -26,7 +26,7 @@ request.destination.with {
     code = 'BHZ'
     departureDay = Date.parse("dd/MM/yyyy", "25/09/2011");
 }
-def  out = new File('C:\\Temp\\out.txt').newWriter();
+def  out = new File(System.getProperty('java.io.tmpdir'), 'out.txt').newWriter();
 http.post(path: 'SearchGroupedFlights', body: request.toString(), requestContentType: ContentType.JSON) { resp, json ->
     out << "SearchGroupedFlights - ${json}"
     out.newLine();
