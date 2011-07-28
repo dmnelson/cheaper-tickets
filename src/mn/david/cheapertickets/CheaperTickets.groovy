@@ -7,12 +7,13 @@ package mn.david.cheapertickets
  */
 import groovyx.net.http.HTTPBuilder
 import groovyx.net.http.ContentType
-import mn.david.cheapertickets.request.SearchRequest
-import mn.david.cheapertickets.request.StatusRequest
+
 import groovyx.net.http.Method
 import groovyx.net.http.HttpResponseDecorator
-import javax.servlet.http.Cookie
+
 import org.apache.http.impl.cookie.BasicClientCookie
+import mn.david.cheapertickets.request.SearchRequest
+import mn.david.cheapertickets.request.StatusRequest
 
 @Grab(group='org.codehaus.groovy.modules.http-builder', module='http-builder', version='0.5.1' )
 def http = new HTTPBuilder('http://www.submarinoviagens.com.br/Passagens/UIService/Service.svc/')
