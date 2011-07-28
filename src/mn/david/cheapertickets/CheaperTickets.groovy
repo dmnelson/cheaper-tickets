@@ -27,7 +27,7 @@ request.destination.with {
     code = 'BHZ'
     departureDay = Date.parse("dd/MM/yyyy", "25/09/2011");
 }
-def  out = new File(System.getProperty('java.io.tmpdir'), 'out.txt').newWriter();
+def  out = new File('out.txt').newWriter();
 http.post(path: 'SearchGroupedFlights', body: request.toString(), requestContentType: ContentType.JSON) { resp, json ->
     out << "SearchGroupedFlights - ${json}"
     out.newLine();
