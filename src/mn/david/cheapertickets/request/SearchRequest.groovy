@@ -24,40 +24,7 @@ class SearchRequest extends Request{
         Date departureDay;
     }
 
-    @Override
-    JSONObject toJSON() {
-        JSONObject root = super.toJSON()
-        root.req << jsonBuilder() {
-            SearchData = [
-                    SearchMode : this.searchMode,
-                    HotelSearchData : this.hotelSearchData,
-                    AirSearchData : {
-                        CityPairsRequest = [[
-                                CiaCodeList : this.origin.flightCompanies,
-                                NonStop : this.origin.nonStop,
-                                Origin : this.origin.code,
-                                Destination : this.destination.code,
-                                DepartureYear : this.origin.departureDay?.format("yyyy"),
-                                DepartureMonth : this.origin.departureDay?.format("MM"),
-                                DepartureDay : this.origin.departureDay?.format("dd")
-                        ], [
-                                CiaCodeList : this.destination.flightCompanies,
-                                NonStop : this.destination.nonStop,
-                                Origin : this.destination.code,
-                                Destination : this.origin.code,
-                                DepartureYear : this.destination.departureDay?.format("yyyy"),
-                                DepartureMonth : this.destination.departureDay?.format("MM"),
-                                DepartureDay : this.destination.departureDay?.format("dd")
-                        ]]
-                        NumberADTs = this.numberOfAdults
-                        NumberCHDs = this.numberOfChildren
-                        SearchType = this.searchType
-                        CabinFilter = this.cabinFilter
-                    }
-            ]
-        }
-        return root;
-    }
+
 
 }
 //{"req":{"PointOfSale":"SUBMARINO","SearchData":{"SearchMode":1,"AirSearchData":{"CityPairsRequest":[{"CiaCodeList":[],"NonStop":true,"Origin":"POA","Destination":"BHZ","DepartureYear":"2011","DepartureMonth":"07","DepartureDay":"22","StartTime":0,"EndTime":2},{"CiaCodeList":[],"NonStop":true,"Origin":"BHZ","Destination":"POA","DepartureYear":"2011","DepartureMonth":"07","DepartureDay":"24","StartTime":0,"EndTime":2}],"NumberADTs":"1","NumberCHDs":"0","NumberINFs":"1","SearchType":1,"CabinFilter":1},"HotelSearchData":null},"UserBrowser":"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.122 Safari/534.30"}}
