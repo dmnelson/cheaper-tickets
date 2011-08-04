@@ -1,6 +1,6 @@
 # idea project files
 *.iml
-.idea/**/*
+.idea
 
 
 # compiled files
