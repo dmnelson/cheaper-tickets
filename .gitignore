@@ -1,0 +1,11 @@
+# idea project files
+*.iml
+.idea/**/*
+
+
+# compiled files
+out/**/*
+
+# editor files
+*.swp
+
