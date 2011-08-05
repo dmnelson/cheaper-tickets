@@ -1,6 +1,5 @@
 package mn.david.cheapertickets
 
-import org.junit.Test
 
 /**
  * User: David Nelson <http://github.com/dmnelson>
@@ -9,7 +8,6 @@ import org.junit.Test
  */
 class FinderTest extends GroovyTestCase{
 
-    @Test
     void testShouldSearchTickets(){
        new Finder().airfares {
            to BHZ from POA at '12/08/2011'
