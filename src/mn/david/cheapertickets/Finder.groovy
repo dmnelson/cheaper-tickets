@@ -14,7 +14,6 @@ import groovyx.net.http.Method
  * Time: 12:21 PM
  * tickets {*     going from POA to BHZ on 'dd/MM/yyyy' returning on 'dd/MM/yyyy'}airfares{tickets(going).from(POA).to(BHZ).on('dd/MM/yyyy');}*/
 
-@Grab(group = 'org.codehaus.groovy.modules.http-builder', module = 'http-builder', version = '0.5.1')
 class Finder {
 
 
