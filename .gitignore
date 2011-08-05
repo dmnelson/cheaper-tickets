@@ -1,10 +1,14 @@
 # idea project files
 *.iml
+*.ipr
+*.iws
 .idea
 
 
 # compiled files
 out/**/*
+build/**/*
+.gradle
 
 # editor files
 *.swp
