@@ -18,15 +18,14 @@ enum Destination {
 
     static Destination getDestination(String value) {
         Destination valueOfEnum = Enum.valueOf(Destination, value);
-        if (valueOfEnum) {
-            return valueOfEnum;
-        } else {
+        if(!valueOfEnum){
             for (it in Destination.values()) {
-                if (it.name == value) {
+                if (it.name.equalsIgnoreCase(value)) {
                     return it;
                 }
             }
             return null;
         }
+        return valueOfEnum;
     }
 }
