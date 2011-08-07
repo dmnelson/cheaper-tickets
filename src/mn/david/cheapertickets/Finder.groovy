@@ -1,11 +1,10 @@
 package mn.david.cheapertickets
 
-import java.text.DateFormat
-import mn.david.cheapertickets.builders.submarino.SearchRequestBuilder
+import mn.david.cheapertickets.search.engine.submarino.builder.SearchRequestBuilder
 import groovyx.net.http.HTTPBuilder
 import groovyx.net.http.HttpResponseDecorator
 import groovyx.net.http.ContentType
-import mn.david.cheapertickets.request.StatusRequest
+import mn.david.cheapertickets.search.request.StatusRequest
 import groovyx.net.http.Method
 
 /**
@@ -91,11 +90,11 @@ class Finder {
         }
 
         def from(String city) {
-            return from(Destination.getDestination(city));
+            return from(Destination.get(city));
         }
 
         def to(String city) {
-            return to(Destination.getDestination(city))
+            return to(Destination.get(city))
         }
 
         def at(String date) {

@@ -16,16 +16,9 @@ enum Destination {
         this.name = name;
     }
 
-    static Destination getDestination(String value) {
-        Destination valueOfEnum = Enum.valueOf(Destination, value);
-        if(!valueOfEnum){
-            for (it in Destination.values()) {
-                if (it.name.equalsIgnoreCase(value)) {
-                    return it;
-                }
-            }
-            return null;
-        }
-        return valueOfEnum;
+    static Destination get(String value) {
+        def valueByCode = Destination.valueOf value;
+        return valueByCode ?: Destination.values().find { it.name.equalsIgnoreCase(value) }
     }
+
 }
