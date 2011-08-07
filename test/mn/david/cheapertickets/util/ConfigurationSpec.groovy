@@ -34,20 +34,17 @@ class ConfigurationSpec extends Specification {
     }
 
 
-    def "loading configuration from file"(){
+    def "loading all configuration from a file"(){
         given: "A temp file"
-            File configTempFile = new File(System.getProperty('java.io.tmpdir'), 'cheaper-tickets-configfile.groovy');
-            configTempFile.withWriter { w ->
-                w << '''
-                    my {
-                        test {
-                            config = 'WooHoo'
-                        }
-                    }
-                '''
-            }
+            File configTempFile = createTempConfigFile("""
+                                        my {
+                                            test {
+                                                config = 'WooHoo'
+                                            }
+                                        }
+                                    """);
 
-        and: "A mocked 'getConfigFile' method"
+        and: "A mocked 'getConfigFile' method that returns that file"
             Configuration.metaClass.'static'.getConfigFile = {
                 configTempFile.toURL();
             }
@@ -55,26 +52,34 @@ class ConfigurationSpec extends Specification {
         when: "The deepest configuration is acessed"
             def deepestConfig = Configuration.get().my.test.config;
 
-        then "The value of the configuration should be the same as defined on the file":
+        then: "The value of the configuration should be the same as defined on the file"
             deepestConfig == 'WooHoo';
 
         when: "One of the intermediate level configuration is acessed"
-            config = Configuration.get().my.test
+            def anotherConfig = Configuration.get().my.test
 
         then: "A wrapper object should be returned"
-            config instanceof ConfigObject
+            anotherConfig instanceof ConfigObject
 
         cleanup: "Deleting the file and reseting the Configuration metaclass"
             configTempFile.delete();
             Configuration.metaClass = null;
     }
 
-    private def mockForConfigObject() {
+    private static mockForConfigObject() {
         def mock = new MockFor(ConfigObject);
         mock.demand.containsKey(0..1) { key -> true }
         mock.demand.get(0..1) { name ->
             mock.proxyInstance();
         }
         return mock;
+    }
+
+    private static createTempConfigFile(def contents) {
+        File configTempFile = new File(System.getProperty('java.io.tmpdir'), 'cheaper-tickets-configfile.groovy');
+        configTempFile.withWriter { w ->
+            w << contents
+        }
+        return configTempFile;
     }
 }
