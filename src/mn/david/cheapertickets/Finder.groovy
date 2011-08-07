@@ -1,10 +1,10 @@
 package mn.david.cheapertickets
 
-import mn.david.cheapertickets.builders.submarino.SearchRequestBuilder
+import mn.david.cheapertickets.search.engine.submarino.builder.SearchRequestBuilder
 import groovyx.net.http.HTTPBuilder
 import groovyx.net.http.HttpResponseDecorator
 import groovyx.net.http.ContentType
-import mn.david.cheapertickets.request.StatusRequest
+import mn.david.cheapertickets.search.request.StatusRequest
 import groovyx.net.http.Method
 
 import mn.david.cheapertickets.domain.City
@@ -91,7 +91,7 @@ class Finder {
             return this;
         }
 
-        def from(String city) {
+        def from(String city){
             return from(City.getDestination(city));
         }
 
