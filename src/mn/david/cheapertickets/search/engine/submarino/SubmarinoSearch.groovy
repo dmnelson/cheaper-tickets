@@ -15,14 +15,9 @@ import mn.david.cheapertickets.util.Configuration
  */
 class SubmarinoSearch extends AbstractSearch {
 
-    private static final String webserviceURL = "http://www.submarinoviagens.com.br/Passagens/UIService/Service.svc/"
-    private static final String searchServiceURL = "SearchGroupedFlights"
-    private static final String statusServiceURL = "GetSearchStatus"
-
     private String searchId;
     private String pullStatusFrom;
     private SearchRequest searchRequest;
-
 
     void requestSearch(SearchRequest request) {
         def webserviceConfig = Configuration.get().cheaperTickets.engine.submarino.webservice;
@@ -38,7 +33,6 @@ class SubmarinoSearch extends AbstractSearch {
                 completed();
             }
         }
-
     }
 
     void updateResults() {

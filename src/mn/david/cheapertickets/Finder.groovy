@@ -1,12 +1,13 @@
 package mn.david.cheapertickets
 
-import java.text.DateFormat
 import mn.david.cheapertickets.builders.submarino.SearchRequestBuilder
 import groovyx.net.http.HTTPBuilder
 import groovyx.net.http.HttpResponseDecorator
 import groovyx.net.http.ContentType
 import mn.david.cheapertickets.request.StatusRequest
 import groovyx.net.http.Method
+
+import mn.david.cheapertickets.domain.City
 
 /**
  * User: David Nelson <http://github.com/dmnelson>
@@ -69,33 +70,33 @@ class Finder {
 
     protected class SearchQuery {
 
-        private Destination origin;
-        private Destination destination;
+        private City origin;
+        private City destination;
         private Date departureDate;
 
         static {
             SearchQuery.metaClass.getProperty = { name ->
                 def metaProperty = SearchQuery.metaClass.getMetaProperty(name)
-                metaProperty ? metaProperty.getProperty(delegate) : Destination.valueOf(name);
+                metaProperty ? metaProperty.getProperty(delegate) : City.valueOf(name);
             }
         }
 
-        def from(Destination city) {
+        def from(City city) {
             origin = city;
             return this;
         }
 
-        def to(Destination city) {
+        def to(City city) {
             destination = city;
             return this;
         }
 
         def from(String city) {
-            return from(Destination.getDestination(city));
+            return from(City.getDestination(city));
         }
 
         def to(String city) {
-            return to(Destination.getDestination(city))
+            return to(City.getDestination(city))
         }
 
         def at(String date) {

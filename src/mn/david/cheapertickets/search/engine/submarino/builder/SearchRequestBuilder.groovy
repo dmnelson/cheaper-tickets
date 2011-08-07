@@ -2,7 +2,7 @@ package mn.david.cheapertickets.search.engine.submarino.builder
 
 import mn.david.cheapertickets.search.request.SearchRequest
 import net.sf.json.JSONObject
-import mn.david.cheapertickets.Destination
+import mn.david.cheapertickets.domain.City
 
 import java.util.logging.Logger
 
@@ -29,14 +29,14 @@ class SearchRequestBuilder extends RequestBuilder<SearchRequest> {
         return new SearchRequestBuilder(c);
     }
 
-    SearchRequestBuilder from(Destination from) {
+    SearchRequestBuilder from(City from) {
         this.request.origin.code = from?.toString();
         return this;
     }
 
 
 
-    SearchRequestBuilder to(Destination to) {
+    SearchRequestBuilder to(City to) {
         this.request.destination.code = to?.toString();
         return this;
     }

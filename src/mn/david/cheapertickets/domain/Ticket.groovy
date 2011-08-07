@@ -1,7 +1,6 @@
 package mn.david.cheapertickets.domain
 
 import java.text.DateFormat
-import mn.david.cheapertickets.search.City
 
 /**
  * User: David
@@ -16,7 +15,7 @@ class Ticket implements Comparable<Ticket> {
     Date departure;
 
     int compareTo(Ticket o) {
-        return cost?.compareTo(o?.cost);
+        cost?.compareTo(o?.cost);
     }
 
     @Override
