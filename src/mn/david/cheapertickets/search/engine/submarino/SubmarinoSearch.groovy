@@ -3,7 +3,7 @@ package mn.david.cheapertickets.search.engine.submarino
 import mn.david.cheapertickets.search.AbstractSearch
 import groovyx.net.http.HTTPBuilder
 import groovyx.net.http.ContentType
-import mn.david.cheapertickets.search.request.Request
+
 import mn.david.cheapertickets.search.request.SearchRequest
 import mn.david.cheapertickets.search.SearchException
 import mn.david.cheapertickets.util.Configuration
@@ -20,7 +20,7 @@ class SubmarinoSearch extends AbstractSearch {
     private SearchRequest searchRequest;
 
     void requestSearch(SearchRequest request) {
-        def webserviceConfig = Configuration.get().cheaperTickets.engine.submarino.webservice;
+        def webserviceConfig = Configuration.config.cheaperTickets.engine.submarino.webservice;
         def http = new HTTPBuilder(webserviceConfig.baseURL)
         http.post(path: webserviceConfig.search, body: request, requestContentType: ContentType.JSON) { response, json ->
             println json;

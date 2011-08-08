@@ -68,7 +68,7 @@ class Finder {
         City origin;
         City destination;
         Date departureDate;
-        String dateFormat = Configuration.getConfig()?.cheaperTickets?.dateFormat
+        String dateFormat = Configuration.config.cheaperTickets.dateFormat
 
         static {
             SearchQuery.metaClass.getProperty = { name ->

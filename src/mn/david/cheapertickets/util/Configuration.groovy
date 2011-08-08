@@ -7,19 +7,18 @@ package mn.david.cheapertickets.util
  */
 class Configuration {
 
-    private static ConfigObject config;
+    protected static ConfigObject config;
 
-    protected static getConfigFile(){
-        def url = Configuration.getResource("/cheaper-tickets.gcfg");
-        println Configuration.getResource("/")
-        println url;
-        return url;
+    protected static getConfigFile() {
+        Configuration.getResource("/cheaper-tickets.gcfg");
     }
 
-    synchronized static ConfigObject get() {
-        if (!config)
-            config = new ConfigSlurper().parse(configFile)
-
-        return config;
+    synchronized static ConfigObject getConfig() {
+        if (!config) {
+            def fileURL = configFile;
+            if (fileURL)
+                config = new ConfigSlurper().parse(fileURL)
+        }
+        return config ?: new ConfigObject();
     }
 }
