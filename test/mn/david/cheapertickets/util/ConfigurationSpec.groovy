@@ -37,7 +37,6 @@ class ConfigurationSpec extends Specification {
 
     def "loading all configuration from a file"(){
         given: "A temp file"
-            Configuration.metaClass = null;
             File configTempFile = createTempConfigFile("""
                                         my {
                                             test {
@@ -62,10 +61,10 @@ class ConfigurationSpec extends Specification {
         when: "One of the intermediate level configuration is acessed"
             def anotherConfig = Configuration.config.my.test
 
-       then: "A wrapper object should be returned"
+        then: "A wrapper object should be returned"
             anotherConfig instanceof ConfigObject
 
-       cleanup: "Deleting the file and reseting the Configuration metaclass"
+        cleanup: "Deleting the file and reseting the Configuration metaclass"
             configTempFile.delete();
             Configuration.metaClass = null;
             Configuration.config = null;
