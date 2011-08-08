@@ -8,12 +8,13 @@ import groovy.mock.interceptor.MockFor
  * Date: 8/6/11
  * Time: 10:45 PM
  */
+@groovy.util.logging.Log
 class ConfigurationSpec extends Specification {
 
     def "retrieving a configuration"() {
 
         given:  "A Configuration class that returns an ordinary mock"
-            println 'setup'
+            log.info 'setup'
             def mock = mockForConfigObject();
             Configuration.metaClass.'static'.getConfig = {
                 return mock.proxyInstance();
@@ -53,7 +54,7 @@ class ConfigurationSpec extends Specification {
 
         when: "The deepest configuration is acessed"
             def deepestConfig = Configuration.config.my.test.config;
-            println Configuration.config;
+            log.info Configuration.config?.toString();
 
         then: "The value of the configuration should be the same as defined on the file"
             deepestConfig == 'WooHoo';
