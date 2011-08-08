@@ -8,6 +8,7 @@ import mn.david.cheapertickets.search.request.StatusRequest
 import groovyx.net.http.Method
 
 import mn.david.cheapertickets.domain.City
+import mn.david.cheapertickets.util.Configuration
 
 /**
  * User: David Nelson <http://github.com/dmnelson>
@@ -16,11 +17,6 @@ import mn.david.cheapertickets.domain.City
  * tickets {*     going from POA to BHZ on 'dd/MM/yyyy' returning on 'dd/MM/yyyy'}airfares{tickets(going).from(POA).to(BHZ).on('dd/MM/yyyy');}*/
 
 class Finder {
-
-
-    public Finder() {
-    }
-
 
     def airfares(Closure closure) {
         def query = new SearchQuery();
@@ -68,11 +64,11 @@ class Finder {
     }
 
 
-    protected class SearchQuery {
-
-        private City origin;
-        private City destination;
-        private Date departureDate;
+    protected static class SearchQuery {
+        City origin;
+        City destination;
+        Date departureDate;
+        String dateFormat = Configuration.getConfig()?.cheaperTickets?.dateFormat
 
         static {
             SearchQuery.metaClass.getProperty = { name ->
@@ -91,17 +87,26 @@ class Finder {
             return this;
         }
 
-        def from(String city){
-            return from(City.getDestination(city));
+        def from(String city) {
+            from getCity(city);
         }
 
         def to(String city) {
-            return to(City.getDestination(city))
+            to getCity(city);
         }
 
         def at(String date) {
-            departureDate = Date.parse('dd/MM/yyyy', date);
+            departureDate = Date.parse(dateFormat, date);
             return this
         }
+
+        private static City getCity(String nameOrCode) {
+            def aCity = City.getCity(nameOrCode);
+            if (!aCity) {
+                throw new IllegalArgumentException("Invalid city, must be existent. Check 'City.values()'")
+            }
+            return aCity;
+        }
+
     }
 }

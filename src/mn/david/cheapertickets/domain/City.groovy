@@ -16,9 +16,16 @@ enum City {
         this.name = name;
     }
 
-    static City get(String value) {
-        def valueByCode = valueOf value;
-        return valueByCode ?: values().find { it.name.equalsIgnoreCase(value) }
+    static City getCity(String value) {
+        def valueByCode = values().find{ it.toString() == value};
+        valueByCode ?: forName(value)
     }
 
+    static City forName(String name) {
+        City.values().find { City city -> city.name.equalsIgnoreCase(name) };
+    }
+
+    public static void main(String[] args) {
+       println City.getCity('Teste')
+    }
 }
