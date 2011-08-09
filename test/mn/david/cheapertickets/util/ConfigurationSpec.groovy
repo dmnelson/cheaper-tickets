@@ -96,10 +96,11 @@ class ConfigurationSpec extends Specification {
 
 
     private static mockForConfigObject() {
-        def mock = new MockFor(ConfigObject);
-        mock.demand.containsKey(0..1) { key -> true }
-        mock.demand.get(0..1) { name -> mock.proxyInstance(); }
-        return mock;
+        new MockFor(ConfigObject).with {
+            demand.containsKey(0..1) { key -> true }
+            demand.get(0..1) { name -> mock.proxyInstance(); }
+            return it;
+        };
     }
 
     private static createTempConfigFile(def contents) {
