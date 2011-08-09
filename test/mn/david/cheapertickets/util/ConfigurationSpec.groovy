@@ -47,13 +47,12 @@ class ConfigurationSpec extends Specification {
                                                 config = 'WooHoo'
                                             }
                                         }
-                                    """);
+                                    """);            
+
+        and: "A mocked 'getConfigScript' method that returns that file"
             Configuration.metaClass.'static'.getConfigScript = {
                 configTempFile.toURL();
             }
-
-        and: "A mocked 'getConfigScript' method that returns that file"
-
 
         when: "The deepest configuration is acessed"
             def deepestConfig = Configuration.config.my.test.config;
