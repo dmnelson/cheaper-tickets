@@ -25,7 +25,5 @@ enum City {
         City.values().find { City city -> city.name.equalsIgnoreCase(name) };
     }
 
-    public static void main(String[] args) {
-       println City.getCity('Teste')
-    }
+
 }
