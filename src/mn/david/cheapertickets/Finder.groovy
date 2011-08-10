@@ -68,12 +68,12 @@ class Finder {
         City origin;
         City destination;
         Date departureDate;
-        String dateFormat = Configuration.config.cheaperTickets.dateFormat
+        String dateFormat = Configuration.get{ cheaperTickets.dateFormat }
 
         static {
             SearchQuery.metaClass.getProperty = { name ->
                 def metaProperty = SearchQuery.metaClass.getMetaProperty(name)
-                metaProperty ? metaProperty.getProperty(delegate) : City.valueOf(name);
+                metaProperty ? metaProperty.getProperty(delegate) : City.getCity(name);
             }
         }
 
