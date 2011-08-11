@@ -1,8 +1,9 @@
-package mn.david.cheapertickets.util
+package mn.david.cheapertickets.configuration
 
 import spock.lang.Specification
 import groovy.mock.interceptor.MockFor
 import groovy.util.logging.Commons
+import mn.david.cheapertickets.configuration.Configuration
 
 /**
  * User: David Nelson <http://github.com/dmnelson>
@@ -116,7 +117,7 @@ class ConfigurationSpec extends Specification {
     private static writeConfigFile(def contents) {
         File classLoaderRoot = new File(ClassLoader.getSystemClassLoader().getResource("").toURI());
         log.debug("Class loader root: ${classLoaderRoot.absolutePath}")
-        File configFile = new File(classLoaderRoot, 'cheapertickets_config.groovy');
+        File configFile = new File(classLoaderRoot, 'default_config.groovy');
         configFile.withWriter { w ->
             w << contents
         }

@@ -1,4 +1,4 @@
-package mn.david.cheapertickets
+package mn.david.cheapertickets.configuration
 
 cheaperTickets {
 
