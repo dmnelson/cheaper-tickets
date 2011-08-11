@@ -1,7 +1,6 @@
-package mn.david.cheapertickets
+package mn.david.cheapertickets.search
 
 import spock.lang.Specification
-import mn.david.cheapertickets.Finder.SearchQuery
 import mn.david.cheapertickets.domain.City
 
 /**
@@ -9,7 +8,7 @@ import mn.david.cheapertickets.domain.City
  * Date: 07/08/11
  * Time: 20:10
  */
-class FinderSpec extends Specification {
+class SearchQuerySpec extends Specification {
 
     def "Building search queries using DSL style"() {
 
@@ -61,7 +60,15 @@ class FinderSpec extends Specification {
         then: "A Date instance should be created properly"
             searchQuery.departureDate == Date.parse("yyyy-MM-dd", "2011-06-12")
 
+        when:
+            searchQuery.with {
+                from City.POA to City.BHZ at '15/04/2011'
+            }
 
+        then:
+            searchQuery.origin == City.POA
+            searchQuery.destination == City.BHZ
+            searchQuery.departureDate == Date.parse('yyyy-MM-dd', '2011-04-15')
 
     }
 }
