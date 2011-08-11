@@ -1,6 +1,6 @@
 package mn.david.cheapertickets.search.engine.submarino.builder
 
-import mn.david.cheapertickets.search.request.SearchRequest
+import mn.david.cheapertickets.search.engine.submarino.request.SearchRequest
 import net.sf.json.JSONObject
 import mn.david.cheapertickets.domain.City
 

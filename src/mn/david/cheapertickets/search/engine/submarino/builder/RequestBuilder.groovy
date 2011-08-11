@@ -2,7 +2,7 @@ package mn.david.cheapertickets.search.engine.submarino.builder
 
 import net.sf.json.JSONObject
 import net.sf.json.groovy.JsonGroovyBuilder
-import mn.david.cheapertickets.search.request.Request
+import mn.david.cheapertickets.search.engine.submarino.request.Request
 
 /**
  * User: dnelson

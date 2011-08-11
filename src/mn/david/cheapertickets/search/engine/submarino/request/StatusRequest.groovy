@@ -1,4 +1,4 @@
-package mn.david.cheapertickets.search.request
+package mn.david.cheapertickets.search.engine.submarino.request
 
 import net.sf.json.JSONObject
 
