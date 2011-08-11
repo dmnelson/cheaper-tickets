@@ -20,7 +20,7 @@ class SubmarinoSearch extends AbstractSearch {
     private SearchRequest searchRequest;
 
     void requestSearch(SearchRequest request) {
-        def webserviceConfig = Configuration.config.cheaperTickets.engine.submarino.webservice;
+        def webserviceConfig = Configuration.get { cheaperTickets.engine.submarino.webservice };
         def http = new HTTPBuilder(webserviceConfig.baseURL)
         http.post(path: webserviceConfig.search, body: request, requestContentType: ContentType.JSON) { response, json ->
             println json;
