@@ -1,6 +1,6 @@
 package mn.david.cheapertickets.search.engine
 
-import mn.david.cheapertickets.search.Search
+import mn.david.cheapertickets.search.SearchQuery
 
 /**
  * User: David Nelson <http://github.com/dmnelson>
@@ -9,6 +9,6 @@ import mn.david.cheapertickets.search.Search
  */
 public interface Engine {
 
-    Search searchFor(searchData);
+    Searcher searcherFor(SearchQuery searchData);
 
 }

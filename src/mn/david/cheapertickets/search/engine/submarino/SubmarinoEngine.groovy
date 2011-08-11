@@ -1,7 +1,8 @@
 package mn.david.cheapertickets.search.engine.submarino
 
 import mn.david.cheapertickets.search.engine.Engine
-import mn.david.cheapertickets.search.Search
+import mn.david.cheapertickets.search.engine.Searcher
+import mn.david.cheapertickets.search.SearchQuery
 
 /**
  * User: David Nelson <http://github.com/dmnelson>
@@ -10,11 +11,8 @@ import mn.david.cheapertickets.search.Search
  */
 class SubmarinoEngine implements Engine {
 
-
-
-
-    Search searchFor(searchData) {
-
+    SubmarinoSearcher searcherFor(SearchQuery searchData) {
+        new SubmarinoSearcher(searchData);
     }
 
 }

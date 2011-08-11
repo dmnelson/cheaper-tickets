@@ -1,23 +1,26 @@
 package mn.david.cheapertickets.search.engine.submarino
 
-import mn.david.cheapertickets.search.AbstractSearch
+import mn.david.cheapertickets.search.engine.AbstractSearcher
 import groovyx.net.http.HTTPBuilder
 import groovyx.net.http.ContentType
 
-import mn.david.cheapertickets.search.request.SearchRequest
+import mn.david.cheapertickets.search.engine.submarino.request.SearchRequest
 import mn.david.cheapertickets.search.SearchException
-import mn.david.cheapertickets.util.Configuration
+import mn.david.cheapertickets.configuration.Configuration
+import groovy.transform.InheritConstructors
 
 /**
  * User: David Nelson <http://github.com/dmnelson>
  * Date: 8/5/11
  * Time: 9:10 PM
  */
-class SubmarinoSearch extends AbstractSearch {
+@InheritConstructors
+class SubmarinoSearcher extends AbstractSearcher {
 
     private String searchId;
     private String pullStatusFrom;
     private SearchRequest searchRequest;
+
 
     void requestSearch(SearchRequest request) {
         def webserviceConfig = Configuration.get { cheaperTickets.engine.submarino.webservice };
