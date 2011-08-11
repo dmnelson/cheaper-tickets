@@ -78,8 +78,7 @@ class Configuration {
             configurationInstance = new Configuration();
             configurationInstance.build();
         }
-        c.delegate = configurationInstance.config;
-        c.setResolveStrategy(Closure.DELEGATE_FIRST);
-        return c.call(configurationInstance.config);
+        def closureDelegate = new DelegateScopeClosure(c);
+        return closureDelegate.call(configurationInstance.config);
     }
 }

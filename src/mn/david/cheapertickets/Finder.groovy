@@ -9,6 +9,7 @@ import groovyx.net.http.Method
 
 import mn.david.cheapertickets.domain.City
 import mn.david.cheapertickets.util.Configuration
+import mn.david.cheapertickets.util.DelegateScopeClosure
 
 /**
  * User: David Nelson <http://github.com/dmnelson>
@@ -20,8 +21,8 @@ class Finder {
 
     def airfares(Closure closure) {
         def query = new SearchQuery();
-        closure.delegate = query;
-        closure.call();
+        def closureDelegate = new DelegateScopeClosure(closure);
+        closureDelegate.call(query);
         return results(query);
     }
 
