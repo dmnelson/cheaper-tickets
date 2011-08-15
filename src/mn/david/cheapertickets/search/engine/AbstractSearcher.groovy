@@ -10,11 +10,12 @@ import mn.david.cheapertickets.search.SearchQuery
  */
 abstract class AbstractSearcher implements Searcher {
 
-    private boolean isComplete = false;
+    protected boolean isComplete = false;
     protected SearchQuery searchQuery;
+    List results;
 
-    public AbstractSearcher(SearchQuery searchQuery){
-         this.searchQuery = searchQuery;
+    public AbstractSearcher(SearchQuery searchQuery) {
+        this.searchQuery = searchQuery;
     }
 
     boolean isComplete() {
@@ -23,5 +24,24 @@ abstract class AbstractSearcher implements Searcher {
 
     protected void completed() {
         this.isComplete = true;
+    }
+
+    protected void setResults(List results) {
+        this.results = results;
+    }
+
+    List search() {
+        if (requestSearch()) {
+            while (!isComplete()) {
+                Thread.sleep(1000);
+                updateResults();
+            }
+        }
+        return getResults();
+    }
+
+    void reset() {
+        isComplete = false;
+        results = null;
     }
 }

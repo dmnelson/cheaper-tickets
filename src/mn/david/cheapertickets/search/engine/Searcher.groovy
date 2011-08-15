@@ -9,11 +9,15 @@ import mn.david.cheapertickets.search.engine.submarino.request.SearchRequest
  */
 public interface Searcher {
 
-    void requestSearch(SearchRequest request)
+    boolean requestSearch()
 
     void updateResults()
 
     boolean isComplete()
 
     List getResults();
+
+    List search();
+
+    void reset();
 }

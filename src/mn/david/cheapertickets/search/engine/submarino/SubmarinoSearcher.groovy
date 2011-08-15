@@ -22,7 +22,8 @@ class SubmarinoSearcher extends AbstractSearcher {
     private SearchRequest searchRequest;
 
 
-    void requestSearch(SearchRequest request) {
+    boolean requestSearch() {
+        reset()
         def webserviceConfig = Configuration.get { cheaperTickets.engine.submarino.webservice };
         def http = new HTTPBuilder(webserviceConfig.baseURL)
         http.post(path: webserviceConfig.search, body: request, requestContentType: ContentType.JSON) { response, json ->
@@ -36,13 +37,13 @@ class SubmarinoSearcher extends AbstractSearcher {
                 completed();
             }
         }
+        return true;
     }
 
     void updateResults() {
-        //To change body of implemented methods use File | Settings | File Templates.
+        if (!searchId)
+            throw new IllegalStateException()
     }
 
-    List getResults() {
-        return null  //To change body of implemented methods use File | Settings | File Templates.
-    }
+
 }
