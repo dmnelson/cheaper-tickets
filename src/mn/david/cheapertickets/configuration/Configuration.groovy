@@ -71,24 +71,27 @@ class Configuration {
 
     public static Engine getEngine() {
         configurationInstance.with {
-            if (engine == null) {
-                def engineName = config.cheaperTickets.defaultEngine;
-                def engineClassConfig = config.cheaperTickets.engine[engineName];
+            if (it.@engine == null) {
+                def engineName = it.@config.cheaperTickets.defaultEngine;
+                println engineName;
+                def engineClassConfig = it.@config.cheaperTickets.engine[engineName].engineClass;
+                println engineClassConfig;
+                println engineClassConfig instanceof Class;
                 Class engineClass;
                 if (engineClassConfig instanceof String) {
                     engineClass = Class.forName(engineClassConfig);
                 } else if (engineClassConfig instanceof Class) {
                     engineClass = engineClassConfig;
                 } else {
-                    throw new IllegalArgumentException("Invalid engine configuration type: ${engineClassConfig.class}")
+                    throw new IllegalArgumentException("Invalid engine configuration type: ${engineClassConfig}")
                 }
-                if (engineClass instanceof Engine) {
-                    engine = (Engine) engineClass.newInstance();
+                if (Engine.isAssignableFrom(engineClass)) {
+                    it.@engine = (Engine) engineClass.newInstance();
                 } else {
                     throw new IllegalArgumentException("Invalid engine class: ${engineClass}")
                 }
             }
-            return engine;
+            return it.@engine;
         }
     }
 
