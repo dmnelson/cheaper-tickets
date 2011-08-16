@@ -25,7 +25,9 @@ abstract class Request {
         new JsonGroovyBuilder().json args;
     }
 
-    public String toString(){
+
+    public String toJSONString(){
         return toJSON().toString();
     }
+
 }
