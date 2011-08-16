@@ -11,6 +11,7 @@ import mn.david.cheapertickets.search.SearchQuery
 abstract class AbstractSearcher implements Searcher {
 
     protected boolean isComplete = false;
+    protected boolean hasErrors = false;
     protected SearchQuery searchQuery;
     List results;
 
@@ -20,6 +21,10 @@ abstract class AbstractSearcher implements Searcher {
 
     boolean isComplete() {
         return isComplete;
+    }
+
+    boolean hasErrors() {
+        return hasErrors;
     }
 
     protected void completed() {

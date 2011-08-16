@@ -13,7 +13,9 @@ public interface Searcher {
 
     void updateResults()
 
-    boolean isComplete()
+    boolean isComplete();
+
+    boolean hasErrors();
 
     List getResults();
 

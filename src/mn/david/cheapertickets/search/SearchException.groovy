@@ -9,4 +9,7 @@ import groovy.transform.InheritConstructors
  */
 @InheritConstructors
 class SearchException extends RuntimeException {
+
+    List errors;
+
 }
