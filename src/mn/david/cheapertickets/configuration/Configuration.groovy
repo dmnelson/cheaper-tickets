@@ -3,6 +3,7 @@ package mn.david.cheapertickets.configuration
 import groovy.util.logging.Commons
 
 import mn.david.cheapertickets.util.DelegateScopeClosure
+import mn.david.cheapertickets.search.engine.Engine
 
 /**
  * User: David Nelson <http://github.com/dmnelson>
@@ -13,7 +14,9 @@ import mn.david.cheapertickets.util.DelegateScopeClosure
 class Configuration {
 
     protected static Configuration configurationInstance;
+
     ConfigObject config;
+    private Engine engine;
 
     protected URL loadCustomConfigPlainFile() {
         URL customFile = ClassLoader.getSystemClassLoader().getResource("default_config.groovy");
@@ -64,6 +67,29 @@ class Configuration {
 
     protected void setConfig(ConfigObject config) {
         this.config = config;
+    }
+
+    public static Engine getEngine() {
+        configurationInstance.with {
+            if (engine == null) {
+                def engineName = config.cheaperTickets.defaultEngine;
+                def engineClassConfig = config.cheaperTickets.engine[engineName];
+                Class engineClass;
+                if (engineClassConfig instanceof String) {
+                    engineClass = Class.forName(engineClassConfig);
+                } else if (engineClassConfig instanceof Class) {
+                    engineClass = engineClassConfig;
+                } else {
+                    throw new IllegalArgumentException("Invalid engine configuration type: ${engineClassConfig.class}")
+                }
+                if (engineClass instanceof Engine) {
+                    engine = (Engine) engineClass.newInstance();
+                } else {
+                    throw new IllegalArgumentException("Invalid engine class: ${engineClass}")
+                }
+            }
+            return engine;
+        }
     }
 
     static get(Closure c) {
