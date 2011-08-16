@@ -19,9 +19,9 @@ class Configuration {
     private Engine engine;
 
     protected URL loadCustomConfigPlainFile() {
-        URL customFile = ClassLoader.getSystemClassLoader().getResource("default_config.groovy");
-        mn.david.cheapertickets.configuration.Configuration.log.debug(customFile ? 'Found config file: "/default_config.groovy".' : 'Not found custom configuration file.');
-        return customFile;
+        File customFile = new File(ClassLoader.getSystemClassLoader().getResource("").file, "cheapertickets_config.groovy");
+        log.debug(customFile.exists() ? 'Found config file: "/cheapertickets_config.groovy".' : 'Not found custom configuration file.');
+        return customFile.exists() ? customFile.toURL() : null;
     }
 
     protected Script loadCustomConfigScript() {

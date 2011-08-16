@@ -37,6 +37,7 @@ class ConfigurationSpec extends Specification {
 
         given: "A temp file"
             log.info 'Test: Loading all configuration from a file'
+            Configuration.configurationInstance = null;
             File configTempFile = writeConfigFile("""
                                         my {
                                             test {
@@ -66,14 +67,14 @@ class ConfigurationSpec extends Specification {
         when: "Using the configuration on the standard (static) way"
             def config = Configuration.get { it };
             def deepestFromDefault = Configuration.get{ my.test.config }
-            log.info(config)
-            log.info(configuration.config)
+            log.info("Configurations: " + config + " <-> " + configuration.config)
 
         then: "It should be the same as the manual way"
             config == configuration.config;
             deepestConfig == deepestFromDefault;
 
         cleanup: "Deleting the file and reseting the Configuration metaclass"
+            log.info("Deleting the file")
             assert configTempFile.delete();
             Configuration.configurationInstance = null;
     }
@@ -117,11 +118,10 @@ class ConfigurationSpec extends Specification {
     private static writeConfigFile(def contents) {
         File classLoaderRoot = new File(ClassLoader.getSystemClassLoader().getResource("").toURI());
         log.debug("Class loader root: ${classLoaderRoot.absolutePath}")
-        File configFile = new File(classLoaderRoot, 'default_config.groovy');
+        File configFile = new File(classLoaderRoot, 'cheapertickets_config.groovy');
         configFile.withWriter { w ->
             w << contents
         }
-        log.debug(classLoaderRoot.list() as List)
         return configFile;
     }
 }
