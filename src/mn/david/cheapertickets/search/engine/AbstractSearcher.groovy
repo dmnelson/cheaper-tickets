@@ -35,9 +35,13 @@ abstract class AbstractSearcher implements Searcher {
         this.results = results;
     }
 
+    protected boolean shouldContinueUpdating(){
+        return !hasErrors && !isComplete;
+    }
+
     Collection search() {
         if (requestSearch()) {
-            while (!isComplete()) {
+            while (shouldContinueUpdating()) {
                 Thread.sleep(1000);
                 updateResults();
             }

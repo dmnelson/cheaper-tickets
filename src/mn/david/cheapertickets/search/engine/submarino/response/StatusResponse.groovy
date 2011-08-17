@@ -2,6 +2,7 @@ package mn.david.cheapertickets.search.engine.submarino.response
 
 import mn.david.cheapertickets.domain.Ticket
 import mn.david.cheapertickets.domain.City
+import java.math.RoundingMode
 
 /**
  * User: David Nelson <http://github.com/dmnelson>
@@ -15,21 +16,35 @@ class StatusResponse extends Response {
     StatusResponse(def response) {
         super(response);
         response['PriceGroups'].each {
-            tickets << buildTicket(it);
+            tickets.addAll buildTicket(it);
         }
     }
 
     private def buildTicket(data) {
-        new Ticket().with {
-            origin = data['CityPairs'][0]['Origin'];
-            destination = data['CityPairs'][0]['Destination'];
-            cost = data['Price'];
-            departure = buildDate(data['CityPairs'][0]['FlightGroups'][0]['FirstDepartureTimeValues'])
-            return it;
+        def travelInfo = data['CityPairs'][0];
+        def flightGroups = travelInfo['FlightGroups'];
+        def tickets = [];
+        flightGroups?.each {
+            def travelTimeInfo = it;
+            tickets << new Ticket().with {
+                origin = travelInfo['Origin'];
+                destination = travelInfo['Destination'];
+                cost = buildPrice(data['Price']);
+                departure = buildDate(travelTimeInfo['FirstDepartureTimeValues'])
+                arrival = buildDate(travelTimeInfo['LastArrivalTimeValues'])
+                company = travelTimeInfo['MajorityAirCompanyName']
+                return it;
+            }
         }
+        return tickets;
     }
 
-    private def buildDate(data){
+    private def buildPrice(priceData) {
+        def price = new BigDecimal(priceData);
+        price.setScale(2, RoundingMode.HALF_UP);
+    }
+
+    private def buildDate(data) {
         def date = new Date();
         date.clearTime();
         date[Calendar.YEAR] = data['Year']

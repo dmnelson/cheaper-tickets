@@ -1,7 +1,6 @@
 package mn.david.cheapertickets.search.engine.submarino.response
 
-import mn.david.cheapertickets.search.engine.submarino.SubmarinoEngine.Status
-import net.sf.json.JSONArray
+import mn.david.cheapertickets.search.engine.submarino.SearchStatus
 
 /**
  * User: David Nelson <http://github.com/dmnelson>
@@ -14,14 +13,18 @@ abstract class Response {
     final String searchId;
     final URL pullStatusFrom;
     final Collection errors;
-    final Status status;
+    final SearchStatus status;
 
     Response(def response) {
         this.sessionId = response.SessionId;
         this.searchId = response.SearchId;
         this.pullStatusFrom = new URL(response.PullStatusFrom);
-        this.status = Status.values()[response.Status as int];
+        this.status = SearchStatus[response.Status as int];
         this.errors = response.Errors;
+    }
+
+    boolean isCompleted() {
+        status == SearchStatus.COMPLETE;
     }
 
 }

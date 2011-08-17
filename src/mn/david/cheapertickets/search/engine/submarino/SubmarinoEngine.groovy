@@ -12,10 +12,6 @@ import mn.david.cheapertickets.domain.Ticket
  */
 class SubmarinoEngine implements Engine {
 
-    enum Status {
-        ON_PROGRESS, COMPLETE
-    }
-
     SubmarinoSearcher searcherFor(SearchQuery searchData) {
         new SubmarinoSearcher(searchData);
     }
