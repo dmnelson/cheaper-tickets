@@ -13,12 +13,15 @@ class FinderSpec extends Specification {
 
     def "Dummy"() {
         setup:
-        println 'blabla'
         def tickets = new Finder().airfares {
             from POA to BHZ at '23/09/2011'
         }
-        println tickets;
-        println 'xx'
+
+
+        tickets?.each{
+            println it;
+        }
+
 
         expect:
             1==1
