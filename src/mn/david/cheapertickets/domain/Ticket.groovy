@@ -17,7 +17,12 @@ class Ticket implements Comparable<Ticket> {
     String company;
 
     int compareTo(Ticket o) {
-        cost?.compareTo(o?.cost);
+        origin <=> o.origin ?:
+            destination <=> o.destination ?:
+                cost <=> o.cost ?:
+                    departure <=> o.departure ?:
+                        arrival <=> o.arrival ?:
+                            company <=> o.company;
     }
 
     boolean equals(o) {
@@ -50,7 +55,7 @@ class Ticket implements Comparable<Ticket> {
     @Override
     String toString() {
         DateFormat format = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, new Locale("pt", "BR"))
-        "${origin?.name} -> ${destination?.name} | ${departure ? format.format(departure) : '--'} - R\$ ${cost}"
+        "${origin?.name} -> ${destination?.name} | ${departure ? format.format(departure) : '--'} - ${arrival ? format.format(arrival) : '--'} | R\$ ${cost} - ($company)"
     }
 
 
