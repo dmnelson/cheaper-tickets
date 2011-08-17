@@ -10,6 +10,7 @@ import mn.david.cheapertickets.util.DelegateScopeClosure
 import mn.david.cheapertickets.search.SearchQuery
 import mn.david.cheapertickets.search.engine.Engine
 import mn.david.cheapertickets.configuration.Configuration
+import mn.david.cheapertickets.util.EngineFactory
 
 /**
  * User: David Nelson <http://github.com/dmnelson>
@@ -19,6 +20,16 @@ import mn.david.cheapertickets.configuration.Configuration
 
 class Finder {
 
+    private Engine engine;
+
+    Finder() {
+        engine = EngineFactory.defaultEngine;
+    }
+
+    Finder(Engine engine) {
+        this.engine = engine;
+    }
+
     def airfares(Closure closure) {
         def query = new SearchQuery();
         def closureDelegate = new DelegateScopeClosure(closure);
@@ -27,7 +38,6 @@ class Finder {
     }
 
     protected def results(SearchQuery query) {
-        Engine engine = Configuration.engine;
         engine.search(query);
     }
 
