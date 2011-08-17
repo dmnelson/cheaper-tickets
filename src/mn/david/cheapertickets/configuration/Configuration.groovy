@@ -27,21 +27,21 @@ class Configuration {
     protected Script loadCustomConfigScript() {
         try {
             Class scriptOnDefaultPackage = Class.forName('cheapertickets_config');
-            mn.david.cheapertickets.configuration.Configuration.log.debug('Found config script on default package');
+            log.debug('Found config script on default package');
             if (scriptOnDefaultPackage instanceof Script)
                 return (Script) scriptOnDefaultPackage.newInstance();
             else {
-                mn.david.cheapertickets.configuration.Configuration.log.warn('"cheapertickets_config" not a Script class')
+                log.warn('"cheapertickets_config" not a Script class')
                 throw new IllegalStateException('Invalid cheapertickets_config file/script.')
             }
         } catch (ClassNotFoundException e) {
-            mn.david.cheapertickets.configuration.Configuration.log.debug('Not found custom configuration script.')
+            log.debug('Not found custom configuration script.')
             return null;
         }
     }
 
     protected Script loadDefaultConfigScript() {
-        mn.david.cheapertickets.configuration.Configuration.log.debug('Returning default configuration script.')
+        log.debug('Returning default configuration script.')
         new default_config();
     }
 
@@ -95,7 +95,7 @@ class Configuration {
     static get(Closure c) {
         synchronized (Configuration) {
             if (!configurationInstance) {
-                mn.david.cheapertickets.configuration.Configuration.log.info("Creating new Configuration instance")
+                log.info("Creating new Configuration instance")
                 configurationInstance = new Configuration().build();
             }
         }
