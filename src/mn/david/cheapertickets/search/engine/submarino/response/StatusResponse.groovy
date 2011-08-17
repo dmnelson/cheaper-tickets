@@ -45,8 +45,7 @@ class StatusResponse extends Response {
     }
 
     private def buildDate(data) {
-        def date = new Date();
-        date.clearTime();
+        def date = new Date(0);
         date[Calendar.YEAR] = data['Year']
         date[Calendar.MONTH] = data['Month']-1
         date[Calendar.DAY_OF_MONTH] = data['Day']
