@@ -48,7 +48,7 @@ class StatusResponse extends Response {
         def date = new Date();
         date.clearTime();
         date[Calendar.YEAR] = data['Year']
-        date[Calendar.MONTH] = data['Month']
+        date[Calendar.MONTH] = data['Month']-1
         date[Calendar.DAY_OF_MONTH] = data['Day']
         date[Calendar.HOUR_OF_DAY] = data['Hour']
         date[Calendar.MINUTE] = data['Minutes']
