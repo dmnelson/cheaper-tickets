@@ -16,20 +16,20 @@ class EngineFactory {
 
     public static Engine getEngine(String engineName) {
         def engineClassConfig = Configuration.get { cheaperTickets.engine[engineName].engineClass };
+        def engineClass = getEngineClass(engineClassConfig);
+        return engineClass.newInstance();
+    }
 
-        Class engineClass;
-        if (engineClassConfig instanceof String) {
-            engineClass = Class.forName(engineClassConfig);
-        } else if (engineClassConfig instanceof Class) {
-            engineClass = engineClassConfig;
-        } else {
-            throw new IllegalArgumentException("Invalid engine configuration type: ${engineClassConfig}")
-        }
-        if (Engine.isAssignableFrom(engineClass)) {
-            return (Engine) engineClass.newInstance();
-        } else {
-            throw new IllegalArgumentException("Invalid engine class: ${engineClass}")
-        }
+    private static Class<? extends Engine> getEngineClass(String className) {
+        Class.forName(className).asSubclass(Engine);
+    }
+
+    private static Class<? extends Engine> getEngineClass(Class<? extends Engine> clazz) {
+        clazz;
+    }
+
+    private static Class<? extends Engine> getEngineClass(def whatever) {
+        throw new IllegalArgumentException("Invalid engine configuration type: ${whatever} - ${whatever?.class}")
     }
 
     public static Engine getDefaultEngine() {
