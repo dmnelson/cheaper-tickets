@@ -73,10 +73,7 @@ class Configuration {
         configurationInstance.with {
             if (it.@engine == null) {
                 def engineName = it.@config.cheaperTickets.defaultEngine;
-                println engineName;
                 def engineClassConfig = it.@config.cheaperTickets.engine[engineName].engineClass;
-                println engineClassConfig;
-                println engineClassConfig instanceof Class;
                 Class engineClass;
                 if (engineClassConfig instanceof String) {
                     engineClass = Class.forName(engineClassConfig);
