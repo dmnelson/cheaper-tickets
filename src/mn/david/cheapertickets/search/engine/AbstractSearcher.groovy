@@ -13,7 +13,7 @@ abstract class AbstractSearcher implements Searcher {
     protected boolean isComplete = false;
     protected boolean hasErrors = false;
     protected SearchQuery searchQuery;
-    List results;
+    Collection results;
 
     public AbstractSearcher(SearchQuery searchQuery) {
         this.searchQuery = searchQuery;
@@ -31,11 +31,11 @@ abstract class AbstractSearcher implements Searcher {
         this.isComplete = true;
     }
 
-    protected void setResults(List results) {
+    protected void setResults(Collection results) {
         this.results = results;
     }
 
-    List search() {
+    Collection search() {
         if (requestSearch()) {
             while (!isComplete()) {
                 Thread.sleep(1000);

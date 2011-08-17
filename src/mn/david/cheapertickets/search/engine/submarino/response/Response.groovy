@@ -21,7 +21,7 @@ abstract class Response {
         this.searchId = response.SearchId;
         this.pullStatusFrom = new URL(response.PullStatusFrom);
         this.status = Status.values()[response.Status as int];
-        this.errors = response.Errors as JSONArray;
+        this.errors = response.Errors;
     }
 
 }

@@ -7,8 +7,6 @@ package mn.david.cheapertickets.search.engine.submarino.response
  */
 class SearchResponse extends Response {
 
-
-
     SearchResponse(def response) {
         super(response);
     }

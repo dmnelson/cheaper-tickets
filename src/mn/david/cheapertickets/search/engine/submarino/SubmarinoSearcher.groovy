@@ -14,12 +14,14 @@ import mn.david.cheapertickets.search.engine.submarino.response.SearchResponse
 import mn.david.cheapertickets.search.engine.submarino.SubmarinoEngine.Status
 import mn.david.cheapertickets.search.engine.submarino.response.Response
 import mn.david.cheapertickets.search.engine.submarino.response.StatusResponse
+import groovy.util.logging.Commons
 
 /**
  * User: David Nelson <http://github.com/dmnelson>
  * Date: 8/5/11
  * Time: 9:10 PM
  */
+@Commons
 @InheritConstructors
 class SubmarinoSearcher extends AbstractSearcher {
 
@@ -28,7 +30,8 @@ class SubmarinoSearcher extends AbstractSearcher {
 
     boolean requestSearch() {
         reset()
-        httpRequest(path: webserviceConfig.search, parameters: new SearchRequest(searchQuery)) { response, json ->
+        results = new TreeSet();
+        httpRequest(path: webserviceConfig.search, parameters: new SearchRequest(searchQuery).toJSONString()) { response, json ->
             def searchResponse = new SearchResponse(json);
             updateData(searchResponse);
         }
@@ -43,9 +46,10 @@ class SubmarinoSearcher extends AbstractSearcher {
             throw new IllegalStateException("PullStatusFrom must be NOT null.")
 
         def statusRequest = new StatusRequest(pullStatusFrom: pullStatusFrom, searchId: searchId);
-        httpRequest path: webserviceConfig.status, parameters: statusRequest.toString(), { response, json ->
+        httpRequest path: webserviceConfig.status, parameters: statusRequest.toJSONString(), { response, json ->
             def statusResponse = new StatusResponse(json);
             updateData(statusResponse);
+            results.addAll statusResponse.tickets;
         }
 
     }

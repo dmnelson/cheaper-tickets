@@ -17,9 +17,9 @@ public interface Searcher {
 
     boolean hasErrors();
 
-    List getResults();
+    Collection getResults();
 
-    List search();
+    Collection search();
 
     void reset();
 }
