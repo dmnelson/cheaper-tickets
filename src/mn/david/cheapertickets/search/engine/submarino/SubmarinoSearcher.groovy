@@ -28,28 +28,25 @@ class SubmarinoSearcher extends AbstractSearcher {
 
     boolean requestSearch() {
         reset()
-
         this.results = new TreeSet();
 
         httpRequest(path: webserviceConfig.search, parameters: new SearchRequest(searchQuery).toJSONString()) { response, json ->
             def searchResponse = new SearchResponse(json);
             updateData(searchResponse);
         }
-
         return pullStatusFrom && searchId;
     }
 
     void updateResults() {
         def statusRequest = new StatusRequest(searchId, pullStatusFrom);
-        httpRequest path: webserviceConfig.status, parameters: statusRequest.toJSONString(), { response, json ->
-            def statusResponse = new StatusResponse(json);
-            println '<>'
-            println results.size()
-            println statusResponse.tickets.size()
-            results.addAll statusResponse.tickets;
-            println results.size()
-            println '</>'
-            updateData(statusResponse);
+        try {
+            httpRequest path: webserviceConfig.status, parameters: statusRequest.toJSONString(), { response, json ->
+                def statusResponse = new StatusResponse(json);
+                results.addAll statusResponse.tickets;
+                updateData(statusResponse);
+            }
+        } catch (SearchException e) {
+            log.warn(e)
         }
     }
 
@@ -60,10 +57,9 @@ class SubmarinoSearcher extends AbstractSearcher {
             uri.path = data.path;
             body = data.parameters?.toString();
 
-            response.failure = data.onFailure ?: {  rs ->
-                hasErrors = true;
+            response.failure = data.onFailure ?: {  resp ->
+                throw new SearchException("${resp.statusLine.statusCode} : ${resp.statusLine.reasonPhrase}");
             }
-
             response.success = onSuccess;
         }
     }

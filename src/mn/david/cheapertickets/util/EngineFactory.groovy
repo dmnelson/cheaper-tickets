@@ -1,7 +1,7 @@
 package mn.david.cheapertickets.util
 
-import mn.david.cheapertickets.search.engine.Engine
 import mn.david.cheapertickets.configuration.Configuration
+import mn.david.cheapertickets.search.engine.Engine
 
 /**
  * User: David Nelson <http://github.com/dmnelson>
@@ -9,6 +9,10 @@ import mn.david.cheapertickets.configuration.Configuration
  * Time: 10:49 AM
  */
 class EngineFactory {
+
+    public static String[] getAvailableEngineNames() {
+        Configuration.get { cheaperTickets.engine }*.key as String[]
+    }
 
     public static String getDefaultEngineName() {
         Configuration.get { cheaperTickets.defaultEngine }
@@ -21,7 +25,7 @@ class EngineFactory {
     }
 
     private static Class<? extends Engine> getEngineClass(String className) {
-        Class.forName(className).asSubclass(Engine);
+        Class.forName className asSubclass Engine;
     }
 
     private static Class<? extends Engine> getEngineClass(Class<? extends Engine> clazz) {
@@ -33,6 +37,6 @@ class EngineFactory {
     }
 
     public static Engine getDefaultEngine() {
-        getEngine(getDefaultEngineName())
+        getEngine defaultEngineName;
     }
 }

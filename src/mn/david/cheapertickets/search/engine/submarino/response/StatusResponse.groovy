@@ -39,7 +39,7 @@ class StatusResponse extends Response {
         return tickets;
     }
 
-    private def buildPrice(priceData) {
+    private def buildPrice(double priceData) {
         def price = new BigDecimal(priceData);
         price.setScale(2, RoundingMode.HALF_UP);
     }

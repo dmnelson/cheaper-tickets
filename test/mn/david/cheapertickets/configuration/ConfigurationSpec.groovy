@@ -107,7 +107,7 @@ class ConfigurationSpec extends Specification {
 
     }
 
-    private static mockForConfigObject() {
+    private static MockFor mockForConfigObject() {
         new MockFor(ConfigObject).with { it ->
             demand.containsKey(0..1) { key -> true }
             demand.get(0..1) { name -> it.proxyInstance(); }
