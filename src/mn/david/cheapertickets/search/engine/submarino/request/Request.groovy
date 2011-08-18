@@ -9,6 +9,7 @@ import net.sf.json.groovy.JsonGroovyBuilder
  * Time: 23:00
  */
 abstract class Request {
+
     String pointOfSale = 'SUBMARINO';
     String userBrowser = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.122 Safari/534.30';
 

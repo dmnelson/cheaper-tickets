@@ -36,10 +36,11 @@ class Finder {
     }
 
     private buildQuery(Closure closure) {
-        def query = new SearchQuery();
-        def closureDelegate = new DelegateScopeClosure(closure);
-        closureDelegate.call(query);
-        return query;
+        new SearchQuery().with {
+            def closureDelegate = new DelegateScopeClosure(closure);
+            closureDelegate.call(it);
+            return it;
+        }
     }
 
 }

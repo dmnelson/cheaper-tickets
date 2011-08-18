@@ -8,9 +8,9 @@ import net.sf.json.JSONObject
  * Time: 23:15
  */
 class StatusRequest extends Request {
+
     String searchId;
     URL pullStatusFrom;
-
 
     StatusRequest(String searchId, URL pullStatusFrom) {
          if (!searchId)
