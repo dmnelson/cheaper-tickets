@@ -31,14 +31,15 @@ class Finder {
     }
 
     def airfares(Closure closure) {
+        def query = buildQuery(closure);
+        return engine.search(query);
+    }
+
+    private buildQuery(Closure closure) {
         def query = new SearchQuery();
         def closureDelegate = new DelegateScopeClosure(closure);
         closureDelegate.call(query);
-        return results(query);
-    }
-
-    protected def results(SearchQuery query) {
-        engine.search(query);
+        return query;
     }
 
 }
