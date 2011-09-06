@@ -25,6 +25,8 @@ class SubmarinoSearcher extends AbstractSearcher {
 
     private String searchId;
     private URL pullStatusFrom;
+    private HTTPBuilder httpBuilder = new HTTPBuilder(webserviceConfig.baseURL);
+
 
     boolean requestSearch() {
         reset()
@@ -52,8 +54,7 @@ class SubmarinoSearcher extends AbstractSearcher {
 
 
     private void httpRequest(data, Closure onSuccess) {
-        def http = new HTTPBuilder(webserviceConfig.baseURL)
-        http.request(Method.POST, ContentType.JSON) {  req ->
+        httpBuilder.request(Method.POST, ContentType.JSON) {  req ->
             uri.path = data.path;
             body = data.parameters?.toString();
 

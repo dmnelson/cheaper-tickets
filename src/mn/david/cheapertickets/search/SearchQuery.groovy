@@ -2,6 +2,7 @@ package mn.david.cheapertickets.search
 
 import mn.david.cheapertickets.domain.City
 import mn.david.cheapertickets.configuration.Configuration
+import mn.david.cheapertickets.util.EnumCategory
 
 /**
  * User: David Nelson <http://github.com/dmnelson>
@@ -12,7 +13,7 @@ class SearchQuery {
     City origin;
     City destination;
     Date departureDate;
-    String dateFormat = Configuration.get { cheaperTickets.dateFormat }
+    @Lazy String dateFormat = Configuration.get { cheaperTickets.dateFormat }
 
     static {
         SearchQuery.metaClass.getProperty = { name ->
@@ -42,6 +43,13 @@ class SearchQuery {
     def at(String date) {
         departureDate = Date.parse(dateFormat, date);
         return this
+    }
+
+    def at(args){
+        if(args.any){
+
+        }
+        return this;
     }
 
     private static City getCity(String nameOrCode) {

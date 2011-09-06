@@ -1,11 +1,16 @@
 package mn.david.cheapertickets.domain
 
+import mn.david.cheapertickets.util.EnumCategory
+import groovy.transform.ToString
+
 /**
  * User: David Nelson <http://github.com/dmnelson>
  * Date: 7/31/11
  * Time: 10:48 PM
  */
-enum City {
+
+
+@ToString enum City  {
 
     POA('Porto Alegre'),
     BHZ('Belo Horizonte')
