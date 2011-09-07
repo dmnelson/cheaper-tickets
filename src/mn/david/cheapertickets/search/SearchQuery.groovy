@@ -1,8 +1,7 @@
 package mn.david.cheapertickets.search
 
-import mn.david.cheapertickets.domain.City
 import mn.david.cheapertickets.configuration.Configuration
-import mn.david.cheapertickets.util.EnumCategory
+import mn.david.cheapertickets.domain.City
 
 /**
  * User: David Nelson <http://github.com/dmnelson>

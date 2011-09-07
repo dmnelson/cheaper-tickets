@@ -1,6 +1,5 @@
 package mn.david.cheapertickets.domain
 
-import mn.david.cheapertickets.util.EnumCategory
 import groovy.transform.ToString
 
 /**
@@ -9,8 +8,8 @@ import groovy.transform.ToString
  * Time: 10:48 PM
  */
 
-
-@ToString enum City  {
+@ToString
+enum City  {
 
     POA('Porto Alegre'),
     BHZ('Belo Horizonte')

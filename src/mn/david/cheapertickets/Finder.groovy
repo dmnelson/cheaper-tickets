@@ -1,16 +1,10 @@
 package mn.david.cheapertickets
 
-import groovyx.net.http.HTTPBuilder
-import groovyx.net.http.HttpResponseDecorator
-import groovyx.net.http.ContentType
-import mn.david.cheapertickets.search.engine.submarino.request.StatusRequest
-import groovyx.net.http.Method
-
 import mn.david.cheapertickets.util.DelegateScopeClosure
 import mn.david.cheapertickets.search.SearchQuery
 import mn.david.cheapertickets.search.engine.Engine
-import mn.david.cheapertickets.configuration.Configuration
-import mn.david.cheapertickets.util.EngineFactory
+
+import mn.david.cheapertickets.search.engine.EngineFactory
 
 /**
  * User: David Nelson <http://github.com/dmnelson>
