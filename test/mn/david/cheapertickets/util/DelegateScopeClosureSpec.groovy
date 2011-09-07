@@ -11,17 +11,6 @@ import groovy.mock.interceptor.StubFor
  */
 class DelegateScopeClosureSpec extends Specification {
 
-    static class Delegate {
-
-        public void test(arg) {
-            throw new UnsupportedOperationException();
-        }
-
-        public void two(args) {
-            throw new UnsupportedOperationException();
-        }
-    }
-
     def "Calling closure"() {
 
         setup:
@@ -42,7 +31,17 @@ class DelegateScopeClosureSpec extends Specification {
 
         then:
             mock.expect.verify();
+    }
 
+    static class Delegate {
+
+        def test(arg) {
+            throw new UnsupportedOperationException();
+        }
+
+        def two(args) {
+            throw new UnsupportedOperationException();
+        }
     }
 
 }

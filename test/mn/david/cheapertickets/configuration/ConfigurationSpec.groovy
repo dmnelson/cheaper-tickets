@@ -10,13 +10,11 @@ import mn.david.cheapertickets.configuration.Configuration
  * Date: 8/6/11
  * Time: 10:45 PM
  */
-@Commons
 class ConfigurationSpec extends Specification {
 
     def "Retrieving a configuration"() {
 
         given:  "A Configuration class that returns an ordinary mock"
-            log.info 'Test: Retrieving a configuration'
             def mock = mockForConfigObject();
             def configurationInstance = new Configuration();
             configurationInstance.config = mock.proxyInstance();
@@ -36,7 +34,6 @@ class ConfigurationSpec extends Specification {
     def "Loading all configuration from a file"(){
 
         given: "A temp file"
-            log.info 'Test: Loading all configuration from a file'
             Configuration.configurationInstance = null;
             File configTempFile = writeConfigFile("""
                                         my {
@@ -52,14 +49,12 @@ class ConfigurationSpec extends Specification {
 
         when: "The deepest configuration is acessed"
             def deepestConfig = configuration.config.my.test.config;
-            log.info "Deepest config: ${deepestConfig}"
 
         then: "The value of the configuration should be the same as defined on the file"
             deepestConfig == 'WooHoo';
 
         when: "One of the intermediate level configuration is acessed"
             def anotherConfig = configuration.config.my.test
-            log.info "Intermediate config: ${anotherConfig}"
 
         then: "A wrapper object should be returned"
             anotherConfig instanceof ConfigObject
@@ -67,14 +62,12 @@ class ConfigurationSpec extends Specification {
         when: "Using the configuration on the standard (static) way"
             def config = Configuration.get { it };
             def deepestFromDefault = Configuration.get{ my.test.config }
-            log.info("Configurations: " + config + " <-> " + configuration.config)
 
         then: "It should be the same as the manual way"
             config == configuration.config;
             deepestConfig == deepestFromDefault;
 
         cleanup: "Deleting the file and reseting the Configuration metaclass"
-            log.info("Deleting the file")
             assert configTempFile.delete();
             Configuration.configurationInstance = null;
     }
@@ -82,7 +75,6 @@ class ConfigurationSpec extends Specification {
     def "Loading from actual config file" (){
 
         given:
-            log.info 'Test: Loading from actual config file'
             def configuration = new Configuration();
             def configFile = configuration.loadDefaultConfigScript();
 
@@ -117,7 +109,6 @@ class ConfigurationSpec extends Specification {
 
     private static writeConfigFile(def contents) {
         File classLoaderRoot = new File(ClassLoader.getSystemClassLoader().getResource("").toURI());
-        log.debug("Class loader root: ${classLoaderRoot.absolutePath}")
         File configFile = new File(classLoaderRoot, 'cheapertickets_config.groovy');
         configFile.withWriter { w ->
             w << contents

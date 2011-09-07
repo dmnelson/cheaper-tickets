@@ -9,15 +9,32 @@ import spock.lang.Specification
  */
 class CitySpec extends Specification {
 
-    def "Static finder"(){
+    def "Static finder by code or name"(){
 
         expect:
-            City.getCity('BHZ') == City.BHZ
-            City.getCity('Belo Horizonte') == City.BHZ
-            City.forName('Belo Horizonte') == City.BHZ
-            City.forName('BHZ') == null
-            City.getCity("XXX") == null
-            City.forName("XYZ") == null
+            City.getCity(nameOrCode) == city
+
+        where:
+            nameOrCode          |   city
+            'BHZ'               |   City.BHZ
+            'Belo Horizonte'    |   City.BHZ
+            'Porto Alegre'      |   City.POA
+            'XYZ'               |   null
+            'PORTO alegre'      |   City.POA
+    }
+
+    def "Static finder only by name"(){
+
+        expect:
+            City.forName(name) == city
+
+        where:
+            name                |   city
+            'BHZ'               |   null
+            'Belo Horizonte'    |   City.BHZ
+            'Porto Alegre'      |   City.POA
+            'XYZ'               |   null
+            'PORTO alegre'      |   City.POA
     }
 
 }
