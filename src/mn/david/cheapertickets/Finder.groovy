@@ -17,10 +17,16 @@ class Finder {
     private Engine engine;
 
     Finder() {
+        if (!EngineFactory.defaultEngine) {
+            throw new IllegalArgumentException('Default engine is null')
+        }
         engine = EngineFactory.defaultEngine;
     }
 
     Finder(Engine engine) {
+        if (!engine) {
+            throw new IllegalArgumentException('Engine must not be null.')
+        }
         this.engine = engine;
     }
 
