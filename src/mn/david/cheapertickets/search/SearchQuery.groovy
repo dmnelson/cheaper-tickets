@@ -2,17 +2,22 @@ package mn.david.cheapertickets.search
 
 import mn.david.cheapertickets.configuration.Configuration
 import mn.david.cheapertickets.domain.City
+import groovy.transform.EqualsAndHashCode
+import groovy.transform.ToString
 
 /**
  * User: David Nelson <http://github.com/dmnelson>
  * Date: 8/11/11
  * Time: 5:44 PM
  */
+@EqualsAndHashCode(excludes = 'dateFormat')
+@ToString(excludes = 'dateFormat')
 class SearchQuery {
+
     City origin;
     City destination;
     Date departureDate;
-    @Lazy String dateFormat = Configuration.get { cheaperTickets.dateFormat }
+    private String dateFormat;
 
     static {
         SearchQuery.metaClass.getProperty = { name ->
@@ -40,15 +45,26 @@ class SearchQuery {
     }
 
     def at(String date) {
-        departureDate = Date.parse(dateFormat, date);
+        departureDate = Date.parse(getDateFormat(), date);
         return this
     }
 
-    def at(args){
-        if(args.any){
+    def at(args) {
+        if (args.any) {
 
         }
         return this;
+    }
+
+    void setDateFormat(String dateFormat) {
+        this.dateFormat = dateFormat;
+    }
+
+    String getDateFormat() {
+        if (!dateFormat) {
+            dateFormat = Configuration.get { cheaperTickets.dateFormat }
+        }
+        return dateFormat;
     }
 
     private static City getCity(String nameOrCode) {
