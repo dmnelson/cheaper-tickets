@@ -12,8 +12,6 @@ import mn.david.cheapertickets.search.engine.Engine
  */
 class FinderSpec extends Specification {
 
-
-
     def "Searching for tickets"() {
 
         given:
