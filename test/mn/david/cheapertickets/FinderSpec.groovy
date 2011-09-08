@@ -14,7 +14,7 @@ class FinderSpec extends Specification {
 
 
 
-    def "Dummy"() {
+    def "Searching for tickets"() {
 
         given:
             Engine engine = Mock(Engine);
