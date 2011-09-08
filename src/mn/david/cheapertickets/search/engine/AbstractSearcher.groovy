@@ -42,7 +42,6 @@ abstract class AbstractSearcher implements Searcher {
     Collection search() {
         if (requestSearch()) {
             while (shouldContinueUpdating()) {
-                Thread.sleep(1000);
                 updateResults();
             }
         }
