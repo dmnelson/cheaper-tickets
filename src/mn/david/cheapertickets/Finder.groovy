@@ -10,7 +10,7 @@ import mn.david.cheapertickets.search.engine.EngineFactory
  * User: David Nelson <http://github.com/dmnelson>
  * Date: 7/29/11
  * Time: 12:21 PM
- * tickets {*     going from POA to BHZ on 'dd/MM/yyyy' returning on 'dd/MM/yyyy'}airfares{tickets(going).from(POA).to(BHZ).on('dd/MM/yyyy');}*/
+ */
 
 class Finder {
 
