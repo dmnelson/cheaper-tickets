@@ -21,7 +21,7 @@ enum City  {
     }
 
     static City getCity(String value) {
-        def valueByCode = values().find{ it.toString() == value};
+        def valueByCode = values().find{ it.name() == value};
         valueByCode ?: forName(value)
     }
 

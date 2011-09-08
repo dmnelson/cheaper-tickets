@@ -16,8 +16,8 @@ class CitySpec extends Specification {
 
         where:
             nameOrCode          |   city
-            'BHZ'               |   City.BHZ
             'Belo Horizonte'    |   City.BHZ
+            'BHZ'               |   City.BHZ
             'Porto Alegre'      |   City.POA
             'XYZ'               |   null
             'PORTO alegre'      |   City.POA
