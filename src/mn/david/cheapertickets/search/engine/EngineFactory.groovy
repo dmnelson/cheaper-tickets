@@ -10,33 +10,43 @@ import mn.david.cheapertickets.search.engine.Engine
  */
 class EngineFactory {
 
-    public static String[] getAvailableEngineNames() {
-        Configuration.get { cheaperTickets.engine }*.key as String[]
+    private def config;
+
+    public EngineFactory() {
+        config = Configuration.get { cheaperTickets };
     }
 
-    public static String getDefaultEngineName() {
-        Configuration.get { cheaperTickets.defaultEngine }
+    public EngineFactory(def config) {
+        this.config = config;
     }
 
-    public static Engine getEngine(String engineName) {
-        def engineClassConfig = Configuration.get { cheaperTickets.engine[engineName].engineClass };
+    public String[] getAvailableEngineNames() {
+        config.engine*.key as String[]
+    }
+
+    public String getDefaultEngineName() {
+        config.defaultEngine
+    }
+
+    public Engine getEngine(String engineName) {
+        def engineClassConfig = config.engine[engineName].engineClass;
         def engineClass = getEngineClass(engineClassConfig);
         return engineClass.newInstance();
     }
 
-    private static Class<? extends Engine> getEngineClass(String className) {
+    private Class<? extends Engine> getEngineClass(String className) {
         Class.forName className asSubclass Engine;
     }
 
-    private static Class<? extends Engine> getEngineClass(Class<? extends Engine> clazz) {
+    private Class<? extends Engine> getEngineClass(Class<? extends Engine> clazz) {
         clazz;
     }
 
-    private static Class<? extends Engine> getEngineClass(def whatever) {
+    private Class<? extends Engine> getEngineClass(def whatever) {
         throw new IllegalArgumentException("Invalid engine configuration type: ${whatever} - ${whatever?.class}")
     }
 
-    public static Engine getDefaultEngine() {
+    public Engine getDefaultEngine() {
         getEngine defaultEngineName;
     }
 }
