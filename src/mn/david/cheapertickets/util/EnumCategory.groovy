@@ -8,9 +8,9 @@ package mn.david.cheapertickets.util
 @Category(Enum)
 class EnumCategory {
 
-    public Object asType2(Class type){
-        if(type == Integer || type == int){
-            return  ordinal();
+    public Object asType2(Class type) {
+        if (type == Integer || type == int) {
+            return ordinal();
         }
         return super.asType(type);
     }

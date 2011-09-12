@@ -1,7 +1,6 @@
 package mn.david.cheapertickets.search.engine
 
 import mn.david.cheapertickets.configuration.Configuration
-import mn.david.cheapertickets.search.engine.Engine
 
 /**
  * User: David Nelson <http://github.com/dmnelson>

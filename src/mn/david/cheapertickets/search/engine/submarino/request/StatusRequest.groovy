@@ -13,7 +13,7 @@ class StatusRequest extends Request {
     URL pullStatusFrom;
 
     StatusRequest(String searchId, URL pullStatusFrom) {
-         if (!searchId)
+        if (!searchId)
             throw new IllegalStateException("SearchId must be NOT null. Call 'requestSearch' before.")
 
         if (!pullStatusFrom)

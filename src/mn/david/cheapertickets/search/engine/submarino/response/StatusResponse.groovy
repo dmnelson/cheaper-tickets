@@ -1,8 +1,7 @@
 package mn.david.cheapertickets.search.engine.submarino.response
 
-import mn.david.cheapertickets.domain.Ticket
-
 import java.math.RoundingMode
+import mn.david.cheapertickets.domain.Ticket
 import net.sf.json.JSONNull
 
 /**
@@ -22,7 +21,7 @@ class StatusResponse extends Response {
     }
 
     private def buildTicketsForPriceGroup(data) {
-        if(data instanceof JSONNull){
+        if (data instanceof JSONNull) {
             return Collections.emptySet();
         }
         def travelInfo = data['CityPairs'][0];

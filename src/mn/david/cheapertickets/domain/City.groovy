@@ -9,7 +9,7 @@ import groovy.transform.ToString
  */
 
 @ToString
-enum City  {
+enum City {
 
     POA('Porto Alegre'),
     BHZ('Belo Horizonte')
@@ -21,7 +21,7 @@ enum City  {
     }
 
     static City getCity(String value) {
-        def valueByCode = values().find{ it.name() == value};
+        def valueByCode = values().find { it.name() == value};
         valueByCode ?: forName(value)
     }
 

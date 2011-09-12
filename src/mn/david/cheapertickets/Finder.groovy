@@ -1,10 +1,9 @@
 package mn.david.cheapertickets
 
-import mn.david.cheapertickets.util.DelegateScopeClosure
 import mn.david.cheapertickets.search.SearchQuery
 import mn.david.cheapertickets.search.engine.Engine
-
 import mn.david.cheapertickets.search.engine.EngineFactory
+import mn.david.cheapertickets.util.DelegateScopeClosure
 
 /**
  * User: David Nelson <http://github.com/dmnelson>

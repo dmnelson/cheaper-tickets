@@ -1,9 +1,8 @@
 package mn.david.cheapertickets.search.engine.submarino
 
-import mn.david.cheapertickets.search.engine.Engine
-import mn.david.cheapertickets.search.engine.Searcher
-import mn.david.cheapertickets.search.SearchQuery
 import mn.david.cheapertickets.domain.Ticket
+import mn.david.cheapertickets.search.SearchQuery
+import mn.david.cheapertickets.search.engine.Engine
 
 /**
  * User: David Nelson <http://github.com/dmnelson>

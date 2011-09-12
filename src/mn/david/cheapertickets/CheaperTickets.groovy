@@ -16,6 +16,6 @@ def allTickets = new TreeSet();
 }
 
 println "-- Tickets"
-allTickets?.findAll{ it.departure.hours > 12 }.each {
+allTickets?.findAll { it.departure.hours > 12 }.each {
     println it;
 }
