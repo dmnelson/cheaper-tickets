@@ -1,8 +1,8 @@
 package mn.david.cheapertickets.search.engine.submarino.response
 
-import mn.david.cheapertickets.domain.Ticket
-
 import java.math.RoundingMode
+import mn.david.cheapertickets.domain.Ticket
+import net.sf.json.JSONNull
 
 /**
  * User: David Nelson <http://github.com/dmnelson>
@@ -21,6 +21,9 @@ class StatusResponse extends Response {
     }
 
     private def buildTicketsForPriceGroup(data) {
+        if (data instanceof JSONNull) {
+            return Collections.emptySet();
+        }
         def travelInfo = data['CityPairs'][0];
         def flightGroups = travelInfo['FlightGroups'];
         return flightGroups?.collect {
@@ -48,7 +51,6 @@ class StatusResponse extends Response {
         date[Calendar.DAY_OF_MONTH] = data['Day']
         date[Calendar.HOUR_OF_DAY] = data['Hour']
         date[Calendar.MINUTE] = data['Minutes']
-        println date;
         return date.time;
     }
 

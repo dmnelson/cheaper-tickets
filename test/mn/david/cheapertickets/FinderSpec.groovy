@@ -3,6 +3,7 @@ package mn.david.cheapertickets
 import mn.david.cheapertickets.domain.City
 import mn.david.cheapertickets.search.SearchQuery
 import spock.lang.Specification
+import mn.david.cheapertickets.search.engine.Engine
 
 /**
  * User: David Nelson <http://github.com/dmnelson>
@@ -11,20 +12,18 @@ import spock.lang.Specification
  */
 class FinderSpec extends Specification {
 
-    def "Dummy"() {
-        setup:
+    def "Searching for tickets"() {
 
-        def tickets = new Finder().airfares {
-            from POA to BHZ at '23/09/2011'
-        }
+        given:
+            Engine engine = Mock(Engine);
+            Finder finder = new Finder(engine);
 
-        println "-- Tickets"
-        tickets?.each{
-            println it;
-        }
+        when:
+            finder.airfares {
+                from 'Belo Horizonte' to 'Porto Alegre' at '12/06/2011'
+            }
 
-
-        expect:
-            1==1
+        then:
+            1 * engine.search(new SearchQuery(origin: City.BHZ, destination: City.POA, departureDate: Date.parse('dd/MM/yyyy','12/06/2011')));
     }
 }

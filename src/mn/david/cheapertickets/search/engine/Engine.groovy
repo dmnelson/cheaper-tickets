@@ -1,7 +1,7 @@
 package mn.david.cheapertickets.search.engine
 
-import mn.david.cheapertickets.search.SearchQuery
 import mn.david.cheapertickets.domain.Ticket
+import mn.david.cheapertickets.search.SearchQuery
 
 /**
  * User: David Nelson <http://github.com/dmnelson>
@@ -10,8 +10,12 @@ import mn.david.cheapertickets.domain.Ticket
  */
 public interface Engine {
 
-    Searcher searcherFor(SearchQuery searchData);
+    Searcher searcherFor(SearchQuery searchData)
 
-    Collection<Ticket> search(SearchQuery searchQuery);
+    ;
+
+    Collection<Ticket> search(SearchQuery searchQuery)
+
+    ;
 
 }

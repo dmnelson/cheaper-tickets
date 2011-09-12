@@ -1,18 +1,23 @@
 package mn.david.cheapertickets.search
 
-import mn.david.cheapertickets.domain.City
+import groovy.transform.EqualsAndHashCode
+import groovy.transform.ToString
 import mn.david.cheapertickets.configuration.Configuration
+import mn.david.cheapertickets.domain.City
 
 /**
  * User: David Nelson <http://github.com/dmnelson>
  * Date: 8/11/11
  * Time: 5:44 PM
  */
+@EqualsAndHashCode(excludes = 'dateFormat')
+@ToString(excludes = 'dateFormat')
 class SearchQuery {
+
     City origin;
     City destination;
     Date departureDate;
-    String dateFormat = Configuration.get { cheaperTickets.dateFormat }
+    private String dateFormat;
 
     static {
         SearchQuery.metaClass.getProperty = { name ->
@@ -22,34 +27,63 @@ class SearchQuery {
     }
 
     def from(City city) {
+        if (!city) {
+            throw new IllegalArgumentException("Invalid city, must be existent. Check 'City.values()'")
+        }
         origin = city;
         return this;
     }
 
     def to(City city) {
+        if (!city) {
+            throw new IllegalArgumentException("Invalid city, must be existent. Check 'City.values()'")
+        }
         destination = city;
         return this;
     }
 
     def from(String city) {
-        from getCity(city);
+        from getCity(city) as City;
     }
 
     def to(String city) {
-        to getCity(city);
+        to getCity(city) as City;
     }
 
     def at(String date) {
-        departureDate = Date.parse(dateFormat, date);
+        departureDate = Date.parse(getDateFormat(), date);
         return this
     }
 
-    private static City getCity(String nameOrCode) {
-        def aCity = City.getCity(nameOrCode);
-        if (!aCity) {
-            throw new IllegalArgumentException("Invalid city, must be existent. Check 'City.values()'")
+    def at(args) {
+        if (args.any) {
+
         }
-        return aCity;
+        return this;
     }
 
+    void setDateFormat(String dateFormat) {
+        this.dateFormat = dateFormat;
+    }
+
+    String getDateFormat() {
+        if (!dateFormat) {
+            dateFormat = Configuration.get { cheaperTickets.dateFormat }
+        }
+        return dateFormat;
+    }
+
+    private City getCity(String nameOrCode) {
+        City.getCity(nameOrCode);
+    }
+
+    boolean validate() {
+        if (departureDate && departureDate <= (new Date() - 1)) {
+            return false;
+        }
+        if (!origin || !destination) {
+            return false;
+        }
+        return true;
+    }
 }

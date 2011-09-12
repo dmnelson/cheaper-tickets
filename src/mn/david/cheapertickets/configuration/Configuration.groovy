@@ -1,9 +1,8 @@
 package mn.david.cheapertickets.configuration
 
 import groovy.util.logging.Commons
-
-import mn.david.cheapertickets.util.DelegateScopeClosure
 import mn.david.cheapertickets.search.engine.Engine
+import mn.david.cheapertickets.util.DelegateScopeClosure
 
 /**
  * User: David Nelson <http://github.com/dmnelson>
@@ -19,7 +18,11 @@ class Configuration {
     private Engine engine;
 
     protected URL loadCustomConfigPlainFile() {
-        File customFile = new File(ClassLoader.getSystemClassLoader().getResource("").file, "cheapertickets_config.groovy");
+        String fileLocation = ClassLoader.getSystemClassLoader().getResource("cheapertickets_config.groovy")?.file;
+        if (!fileLocation) {
+            return null;
+        }
+        File customFile = new File(fileLocation);
         log.debug(customFile.exists() ? 'Found config file: "/cheapertickets_config.groovy".' : 'Not found custom configuration file.');
         return customFile.exists() ? customFile.toURL() : null;
     }

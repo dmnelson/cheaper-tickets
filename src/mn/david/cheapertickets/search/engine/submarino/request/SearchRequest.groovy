@@ -1,7 +1,7 @@
 package mn.david.cheapertickets.search.engine.submarino.request
 
-import net.sf.json.JSONObject
 import mn.david.cheapertickets.search.SearchQuery
+import net.sf.json.JSONObject
 
 /**
  * User: David

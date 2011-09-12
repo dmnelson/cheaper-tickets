@@ -12,7 +12,7 @@ class SearchException extends RuntimeException {
 
     List errors;
 
-    String toString(){
+    String toString() {
         "${super.toString()}; Errors: ${errors}"
     }
 

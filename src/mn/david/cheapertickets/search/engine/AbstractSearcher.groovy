@@ -1,6 +1,6 @@
 package mn.david.cheapertickets.search.engine
 
-import mn.david.cheapertickets.search.engine.Searcher
+import mn.david.cheapertickets.search.InvalidQueryException
 import mn.david.cheapertickets.search.SearchQuery
 
 /**
@@ -43,9 +43,11 @@ abstract class AbstractSearcher implements Searcher {
     }
 
     Collection search() {
+        if (!searchQuery.validate()) {
+            throw new InvalidQueryException("Invalid SearchQuery state");
+        }
         if (requestSearch()) {
             while (shouldContinueUpdating()) {
-                Thread.sleep(1000);
                 updateResults();
             }
         }

@@ -1,7 +1,5 @@
 package mn.david.cheapertickets.search.engine
 
-import mn.david.cheapertickets.search.engine.submarino.request.SearchRequest
-
 /**
  * User: David Nelson <http://github.com/dmnelson>
  * Date: 8/5/11
@@ -13,13 +11,23 @@ public interface Searcher {
 
     void updateResults()
 
-    boolean isComplete();
+    boolean isComplete()
 
-    boolean hasErrors();
+    ;
 
-    Collection getResults();
+    boolean hasErrors()
 
-    Collection search();
+    ;
 
-    void reset();
+    Collection getResults()
+
+    ;
+
+    Collection search()
+
+    ;
+
+    void reset()
+
+    ;
 }

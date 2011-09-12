@@ -1,7 +1,7 @@
 package mn.david.cheapertickets.domain
 
-import java.text.DateFormat
 import groovy.transform.EqualsAndHashCode
+import java.text.DateFormat
 
 /**
  * User: David

@@ -1,10 +1,14 @@
 package mn.david.cheapertickets.domain
 
+import groovy.transform.ToString
+
 /**
  * User: David Nelson <http://github.com/dmnelson>
  * Date: 7/31/11
  * Time: 10:48 PM
  */
+
+@ToString
 enum City {
 
     POA('Porto Alegre'),
@@ -17,7 +21,7 @@ enum City {
     }
 
     static City getCity(String value) {
-        def valueByCode = values().find{ it.toString() == value};
+        def valueByCode = values().find { it.name() == value};
         valueByCode ?: forName(value)
     }
 

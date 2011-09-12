@@ -6,6 +6,16 @@ package mn.david.cheapertickets
  * Time: 20:22
  */
 
-new Finder().airfares{
-     from POA to BHZ at '23/09/2011'
+def allTickets = new TreeSet();
+
+['16/09/2011'].each { date ->
+    tickets = new Finder().airfares {
+        from POA to BHZ at date
+    }
+    allTickets.addAll(tickets)
+}
+
+println "-- Tickets"
+allTickets?.findAll { it.departure.hours > 12 }.each {
+    println it;
 }

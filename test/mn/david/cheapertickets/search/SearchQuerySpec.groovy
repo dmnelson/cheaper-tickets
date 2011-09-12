@@ -12,11 +12,8 @@ class SearchQuerySpec extends Specification {
 
     def "Building search queries using DSL style"() {
 
-        given: "A search query"
-            def searchQuery = new SearchQuery();
-
-        and: "with a brazilian date format"
-            searchQuery.dateFormat = 'dd/MM/yyyy'
+        given: "A search query with a brazilian date format"
+            def searchQuery = new SearchQuery(dateFormat : 'dd/MM/yyyy');
 
         when: "Origin and destination are set using the inject properties"
             searchQuery.with {
