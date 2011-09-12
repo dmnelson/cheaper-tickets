@@ -1,9 +1,9 @@
 package mn.david.cheapertickets.search
 
-import mn.david.cheapertickets.configuration.Configuration
-import mn.david.cheapertickets.domain.City
 import groovy.transform.EqualsAndHashCode
 import groovy.transform.ToString
+import mn.david.cheapertickets.configuration.Configuration
+import mn.david.cheapertickets.domain.City
 
 /**
  * User: David Nelson <http://github.com/dmnelson>
@@ -27,11 +27,17 @@ class SearchQuery {
     }
 
     def from(City city) {
+        if (!city) {
+            throw new IllegalArgumentException("Invalid city, must be existent. Check 'City.values()'")
+        }
         origin = city;
         return this;
     }
 
     def to(City city) {
+        if (!city) {
+            throw new IllegalArgumentException("Invalid city, must be existent. Check 'City.values()'")
+        }
         destination = city;
         return this;
     }
@@ -68,11 +74,16 @@ class SearchQuery {
     }
 
     private static City getCity(String nameOrCode) {
-        def aCity = City.getCity(nameOrCode);
-        if (!aCity) {
-            throw new IllegalArgumentException("Invalid city, must be existent. Check 'City.values()'")
-        }
-        return aCity;
+        City.getCity(nameOrCode);
     }
 
+    boolean validate() {
+        if (departureDate && departureDate <= (new Date() - 1)) {
+            return false;
+        }
+        if (!origin || !destination) {
+            return false;
+        }
+        return true;
+    }
 }
