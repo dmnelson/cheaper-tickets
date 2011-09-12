@@ -16,6 +16,9 @@ abstract class AbstractSearcher implements Searcher {
     Collection results;
 
     public AbstractSearcher(SearchQuery searchQuery) {
+        if (!searchQuery)
+            throw new IllegalArgumentException("Search query must not be null");
+
         this.searchQuery = searchQuery;
     }
 
@@ -35,7 +38,7 @@ abstract class AbstractSearcher implements Searcher {
         this.results = results;
     }
 
-    protected boolean shouldContinueUpdating(){
+    protected boolean shouldContinueUpdating() {
         return !hasErrors && !isComplete;
     }
 
