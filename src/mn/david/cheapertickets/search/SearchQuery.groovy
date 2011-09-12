@@ -43,11 +43,11 @@ class SearchQuery {
     }
 
     def from(String city) {
-        from getCity(city);
+        from getCity(city) as City;
     }
 
     def to(String city) {
-        to getCity(city);
+        to getCity(city) as City;
     }
 
     def at(String date) {
@@ -73,7 +73,7 @@ class SearchQuery {
         return dateFormat;
     }
 
-    private static City getCity(String nameOrCode) {
+    private City getCity(String nameOrCode) {
         City.getCity(nameOrCode);
     }
 
