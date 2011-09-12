@@ -1,8 +1,8 @@
 package mn.david.cheapertickets.search.engine
 
-import spock.lang.Specification
-import mn.david.cheapertickets.search.SearchQuery
 import mn.david.cheapertickets.domain.Ticket
+import mn.david.cheapertickets.search.SearchQuery
+import spock.lang.Specification
 
 /**
  * User: David Nelson <http://github.com/dmnelson>
@@ -20,7 +20,6 @@ class EngineFactorySpec extends Specification {
     }
 
     def "default engine"() {
-
         expect:
             engineFactory.defaultEngineName == 'someEngine'
             engineFactory.defaultEngine.class == MockEngine;
@@ -40,31 +39,31 @@ class EngineFactorySpec extends Specification {
         then:
             engine.class == MockEngine;
 
-        when:
-            def inexistentEngine = engineFactory.getEngine('inexistent');
+        when: "inexistent engine"
+            engineFactory.getEngine('inexistent');
 
         then:
             thrown(IllegalArgumentException);
 
-        when:
-            def incompleteEngine = engineFactory.getEngine('incompleteEngine');
+        when: "a engine that has no clas configured"
+            engineFactory.getEngine('incompleteEngine');
 
         then:
             thrown(IllegalArgumentException);
 
-        when:
+        when: "a engine with a invalid Class configured"
             engineFactory.getEngine('invalidEngine');
 
         then:
             thrown(ClassCastException);
 
-        when:
+        when: "a engine with a inexistent class configured"
            engineFactory.getEngine('invalidEngine2');
 
         then:
             thrown(ClassNotFoundException);
 
-         when:
+         when: "a engine with a name of a invalid class"
            engineFactory.getEngine('invalidEngine3');
 
         then:
