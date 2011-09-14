@@ -43,11 +43,11 @@ class SearchQuery {
     }
 
     def from(String city) {
-        from getCity(city) as City;
+        from City.getCity(city) as City;
     }
 
     def to(String city) {
-        to getCity(city) as City;
+        to City.getCity(city) as City;
     }
 
     def at(String date) {
@@ -71,10 +71,6 @@ class SearchQuery {
             dateFormat = Configuration.get { cheaperTickets.dateFormat }
         }
         return dateFormat;
-    }
-
-    private City getCity(String nameOrCode) {
-        City.getCity(nameOrCode);
     }
 
     boolean validate() {
