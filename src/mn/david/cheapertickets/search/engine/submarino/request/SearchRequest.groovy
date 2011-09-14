@@ -26,9 +26,9 @@ class SearchRequest extends Request {
     }
 
     SearchRequest(SearchQuery searchQuery) {
-        origin.code = searchQuery.origin.toString();
+        origin.code = searchQuery.origin.name();
         origin.departureDay = searchQuery.departureDate;
-        destination.code = searchQuery.destination.toString();
+        destination.code = searchQuery.destination.name();
     }
 
     @Override
