@@ -13,21 +13,11 @@ public interface Searcher {
 
     boolean isComplete()
 
-    ;
-
     boolean hasErrors()
-
-    ;
 
     Collection getResults()
 
-    ;
-
     Collection search()
 
-    ;
-
     void reset()
-
-    ;
 }

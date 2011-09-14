@@ -12,10 +12,6 @@ public interface Engine {
 
     Searcher searcherFor(SearchQuery searchData)
 
-    ;
-
     Collection<Ticket> search(SearchQuery searchQuery)
-
-    ;
 
 }

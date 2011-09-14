@@ -15,5 +15,4 @@ class SearchException extends RuntimeException {
     String toString() {
         "${super.toString()}; Errors: ${errors}"
     }
-
 }
