@@ -1,4 +1,4 @@
-# Cheaper Projects
+# Cheaper Tickets
 
 Author: David Michael Nelson (davidmichael.nelson -at- gmail -dot- com)
 
@@ -23,7 +23,7 @@ Project meant to find the cheapest plane tickets in Brazil, looking for specific
 ## Setting up
 1. Download and set up Groovy and Gradle
 2. Checkout the code
-3. Test if it builds running ``gradle build`` on project root
+3. Test if it is building by running ``gradle build`` on project root
 4. Have fun!
 
 ### Developing with Intellij IDEA
