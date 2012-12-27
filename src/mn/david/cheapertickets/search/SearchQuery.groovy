@@ -67,7 +67,7 @@ class SearchQuery {
         return dateFormat;
     }
 
-    boolean validate() {
+    boolean isValid() {
         if (departureDate && departureDate <= (new Date() - 1)) {
             return false;
         }

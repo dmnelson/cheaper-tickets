@@ -43,7 +43,7 @@ abstract class AbstractSearcher implements Searcher {
     }
 
     Collection search() {
-        if (!searchQuery.validate()) {
+        if (!searchQuery.isValid()) {
             throw new InvalidQueryException("Invalid SearchQuery state");
         }
         if (requestSearch()) {
