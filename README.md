@@ -26,6 +26,9 @@ Project meant to find the cheapest plane tickets in Brazil, looking for specific
 3. Test if it is building by running ``gradle build`` on project root
 4. Have fun!
 
+## Running
+Run ``gradle run`` from the command line
+
 ### Developing with Intellij IDEA
 1. Run ``gradle idea`` on project root
 2. Open the project on IDEA
