@@ -7,7 +7,7 @@ package mn.david.cheapertickets
  */
 
 def tickets = new Finder().airfares {
-    from BHZ to POA at '22/09/2011'
+    from POA to BHZ at '06/01/2013'
 }
 
 

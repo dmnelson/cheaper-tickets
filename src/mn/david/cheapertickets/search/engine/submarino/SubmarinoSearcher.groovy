@@ -11,7 +11,6 @@ import mn.david.cheapertickets.search.engine.AbstractSearcher
 import mn.david.cheapertickets.search.engine.submarino.request.SearchRequest
 import mn.david.cheapertickets.search.engine.submarino.request.StatusRequest
 import mn.david.cheapertickets.search.engine.submarino.response.Response
-import mn.david.cheapertickets.search.engine.submarino.response.SearchResponse
 import mn.david.cheapertickets.search.engine.submarino.response.StatusResponse
 
 /**
@@ -31,27 +30,26 @@ class SubmarinoSearcher extends AbstractSearcher {
     boolean requestSearch() {
         reset()
         this.results = new TreeSet();
-
-        httpRequest(path: webserviceConfig.search, parameters: new SearchRequest(searchQuery).toJSONString()) { response, json ->
-            def searchResponse = new SearchResponse(json);
-            updateData(searchResponse);
+        def requestParams =  new SearchRequest(searchQuery).toJSONString()
+        httpRequest(path: webserviceConfig.search, parameters: requestParams) { response, json ->
+            updateStatus(json);
         }
         return pullStatusFrom && searchId;
     }
 
     void updateResults() {
         def statusRequest = new StatusRequest(searchId, pullStatusFrom);
-        try {
-            httpRequest path: webserviceConfig.status, parameters: statusRequest.toJSONString(), { response, json ->
-                def statusResponse = new StatusResponse(json);
-                results.addAll statusResponse.tickets;
-                updateData(statusResponse);
-            }
-        } catch (SearchException e) {
-            log.warn(e)
+        httpRequest path: webserviceConfig.status, parameters: statusRequest.toJSONString(), { response, json ->
+            updateStatus(json);
         }
+
     }
 
+    private updateStatus(json){
+        def statusResponse = new StatusResponse(json);
+        results.addAll statusResponse.tickets;
+        updateData(statusResponse);
+    }
 
     private void httpRequest(data, Closure onSuccess) {
         httpBuilder.request(Method.POST, ContentType.JSON) {  req ->
