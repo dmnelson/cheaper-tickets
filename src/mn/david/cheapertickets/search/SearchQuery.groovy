@@ -55,12 +55,6 @@ class SearchQuery {
         return this
     }
 
-    def at(args) {
-        if (args.any) {
-
-        }
-        return this;
-    }
 
     void setDateFormat(String dateFormat) {
         this.dateFormat = dateFormat;
