@@ -23,7 +23,7 @@ abstract class Response {
         this.errors = response.Errors;
     }
 
-    boolean isCompleted() {
+    boolean hasCompleted() {
         status == SearchStatus.COMPLETE;
     }
 

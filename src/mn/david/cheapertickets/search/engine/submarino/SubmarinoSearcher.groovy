@@ -70,7 +70,7 @@ class SubmarinoSearcher extends AbstractSearcher {
             throw new SearchException(errors: response.errors);
         }
 
-        this.isComplete = response.isCompleted();
+        this.isComplete = response.hasCompleted();
         this.pullStatusFrom = response.pullStatusFrom;
         this.searchId = response.searchId;
     }
