@@ -23,7 +23,7 @@ class FinderSpec extends Specification {
                 from 'Belo Horizonte' to 'Porto Alegre' at '12/06/2011'
             }
 
-        then: "the engine search method should be called onde"
+        then: "the engine search method should be called once"
             1 * engine.search(new SearchQuery(origin: City.BHZ, destination: City.POA, departureDate: Date.parse('dd/MM/yyyy','12/06/2011')));
     }
 }
