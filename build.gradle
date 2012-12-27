@@ -3,7 +3,7 @@ apply plugin: 'groovy'
 
 repositories {
     mavenCentral()
-    mavenRepo urls: "http://m2repo.spockframework.org/releases"
+    mavenRepo url: "http://m2repo.spockframework.org/releases"
 }
 
 sourceSets {
